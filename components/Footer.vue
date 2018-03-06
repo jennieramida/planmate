@@ -1,0 +1,70 @@
+<template>
+  <div class="foot">
+       <!-- Footer -->
+    <div class="footer _pdv-24px lo-4 _zid-1">
+      <div class="_tal-l _pdl-24px _pdbt-4px">
+        <a href="javascript: history.back()">
+          <BackButton :back="back"/>
+        </a>
+      </div>
+
+      <div>
+        <!-- emptyspace -->
+      </div>
+
+      <div class="_tal-r _pdr-24px _pdbt-4px">
+        <nuxt-link :to="link">
+         <Button :title="title"/>
+        </nuxt-link>
+      </div>
+    </div>
+
+  </div>
+</template>
+
+<script>
+import Button from '~/components/MyButton.vue'
+import BackButton from '~/components/MyGreyButton.vue'
+
+export default {
+    props: ['link','title','back','link2'],
+    components: {
+    Button,
+    BackButton
+    }
+}
+</script>
+
+<style scoped>
+
+.foot {
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    background-color: #F8F7F7;
+    box-shadow: 0 1px 6px 0 #D7D7D7;
+}
+  .logohead {
+    width: 90%;
+  }
+
+
+
+    .BC {
+        background-color: #F8F7F7;
+        align-items: center;
+    }
+
+    .line {
+      background-color: #D1D1D1;
+      max-width: 100%;
+    }
+
+    .thispage {
+      color: #69AFC0;
+    }
+
+    .pages {
+      color: dimgray;
+    }
+</style>
