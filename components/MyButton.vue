@@ -14,15 +14,15 @@
 <style scoped>
     div {
         cursor: pointer;
-        background-color: #477C89;
         border: none;
-        padding: 10px 20px;
+        padding: 12px 24px;
         text-align: center;
         display: inline-block;
         font-size: 16px;
         color: white;
         border-radius: 6px;
-        box-shadow: 0 1px 6px 0 #477C89;
+        background-color: #477c89;
+        box-shadow: 1px 2px 4px 0 rgba(67, 124, 128, 0.42);
         font-family: 'Helvetica';
         font-weight: 540;
         font-size: 1.2em;

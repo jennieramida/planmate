@@ -16,7 +16,7 @@
         </div>
         
         <div class="_pd-24px _mg-12px">
-            <nuxt-link to="/newform">
+            <nuxt-link to="/create">
             <Button title="Create New Form" />
             </nuxt-link>
             <div class=" _pdt-12px subtitle _fw-100 _fs-7 _pdt-2px _pdbt-12px">
@@ -39,7 +39,9 @@
             <div class="lo-6 _pdt-12px">
               <div class="_tal-r">
                 <div>
-                  <img class="_pd-8px" src="~/assets/venice.png">
+                  <nuxt-link to="/frdhome">
+                    <img class="_pd-8px" src="~/assets/venice.png">
+                  </nuxt-link>
                 </div>
                 <div>
                 <img class="_pd-8px" src="~/assets/paris.png">
@@ -54,29 +56,7 @@
                 <img class="_pd-8px" src="~/assets/venice.png">
                 </div>
               </div>
-            </div>
-
-            <!-- <nuxt-link to="/">
-                <div class="desbox _pd-12px _fw-600 _mgv-12px">
-                    Family trip to Italy
-                    <div class="_fs-8 textred _pdt-4px _fw-500">
-                        This form will expire in 15 days.
-                    </div>
-                </div>
-            </nuxt-link>
-            <div class="desbox _pd-12px _fw-600 _mgv-12px">
-                London-Scotland (Summer)
-                <div class="_fs-8 textred _pdt-4px _fw-500">
-                    This form will expire in 10 days.
-                </div>
-            </div>
-            <div class="desbox _pd-12px _fw-600 _mgv-12px">
-                Russia (22 March-28 March)
-                <div class="_fs-8 textred _pdt-4px _fw-500">
-                    This form will expire in 5 days.
-                </div>
-            </div> -->
-        
+            </div>        
     </div>
   </MyDefaultLayout>
 </template>

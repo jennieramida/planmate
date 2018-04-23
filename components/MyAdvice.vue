@@ -3,9 +3,9 @@
         <input :id="id" type="checkbox" name="ar" class="_dp-n">
         <label :for="id"><div class="_fs-4 _fw-600 _cl-dark">{{ topic }} </div></label>
         <div class="bio-accordion-content _tal-l _pdl-48px">
-            <div class="bio-checkbox" v-for="(x, i) in choices" :key="i">
-                <input :id="x.id" type="checkbox" @change="selectCheck(x.title)">
-                <label :for="x.id"> {{ x.title }}</label>
+            <div class="bio-textarea">
+                <!-- <input :id="x.id"> -->
+                <textarea ref="textArea" @change="sendTextBack()" rows="3" placeholder="What do you want to know?"></textarea>
             </div>
         </div>
     </div>
@@ -13,10 +13,10 @@
 
 <script>
 export default {
-  props: ['topic', 'choices', 'id'],
+  props: ['topic', 'id'],
   methods: {
-      selectCheck (title) {
-          this.$emit('sendCheckbox', title)
+      sendTextBack() {
+          this.$emit('sendAdvice', this.$refs.textArea.value)
       }
   }
 }

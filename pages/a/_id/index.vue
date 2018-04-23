@@ -21,7 +21,9 @@
       </div>
   
       <div class="_tal-ct _pdbt-12px _pdt-64px ">
-        <nuxt-link to="/frdpage">
+        <nuxt-link 
+        :to='`/a/${$route.params.id}/destinations`'
+        >
           <Button title="Give a hand" />
         </nuxt-link>
       </div>
@@ -39,6 +41,7 @@
   import MyDefaultLayout from '~/layouts/MyDefaultLayout.vue'
   import Button from '~/components/MyButton.vue'
   import Header from '~/components/Header.vue'
+  import * as Firebase from '~/services/firebase'
   
   export default {
     components: {
@@ -46,11 +49,22 @@
       Button,
       Header
     },
+    async asyncData ({ params }) {
+      // server render
+      const x = await Firebase.retrieveForm(params.id)
+      // console.log(x.val())
+      return {
+        trip: x.val()
+      }
+    },
     data() {
       return {
         frdName: '',
         username: ''
       }
+    },
+    created () {
+      this.$store.commit('setFormData', this.trip)
     },
     methods: {
       updateUserName() {

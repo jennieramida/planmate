@@ -1,12 +1,14 @@
 <template>
-  <div class="top">
+  <div class="top _w-100pct">
        <!-- Header -->
     <div class="header _pd-12px lo-4 _zid-1">
       <div class="_dp-f _alit-ct">
         <img src="~/assets/hamburgerbtn.png">  
       </div>
       <div class="_tal-ct _pdbt-4px">
-        <img class="logohead" src="~/assets/logo.png">
+        <nuxt-link to="/">
+          <img class="logohead" src="~/assets/logo.png">
+        </nuxt-link>
       </div>
     </div>
 
@@ -16,10 +18,10 @@
         <div class="BC _pdh-24px _pdv-12px _fs-7 _zid-0" >
           <div class="bio-breadcrumb">
             <div><a class="bio-link pages" href="/userpage">My Page</a></div>
-            <div><a class="bio-link thispage" href="/newform">Trip Name</a></div>
-            <div><a class="bio-link pages" href="/travelers">Travelers</a></div>
-            <div><a class="bio-link pages" href="/destination">Destination</a></div>
-            <div><a class="bio-link pages" href="/share">Get Link</a></div>
+            <div><a class="bio-link thispage" href="/create">Trip Name</a></div>
+            <div><a class="bio-link pages" href="/usertravelers">Travelers</a></div>
+            <div><a class="bio-link pages" href="/userdestinations">Destination</a></div>
+            <div><a class="bio-link pages" href="/usergetlink">Get Link</a></div>
           </div>
         </div>
         <div class="line _pdt-1px">

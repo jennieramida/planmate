@@ -22,8 +22,7 @@
       <div class="subtitle _fw-100 _fs-6">
           Woooo! Bonjour!
         </div>
-
-        <Footer title='Next' link='/cityinterest' back='Back'></Footer>
+        <Footer title='Next' :link='`/create/${$route.params.id}/interests`' back='Back'></Footer>
   </MyDefaultLayout>
 </template>
 
@@ -32,7 +31,7 @@ import MyDefaultLayout from '~/layouts/MyDefaultLayout.vue'
 import Button from '~/components/MyButton.vue'
 import Header from '~/components/Header.vue'
 import Footer from '~/components/Footer.vue'
-
+import * as Firebase from '~/services/firebase'
 
 export default {
   components: {
@@ -40,6 +39,37 @@ export default {
     Button,
     Header,
     Footer
+  },
+  mounted () {
+    // update tripData
+    Firebase.updateForm(this.$store.state.tripData.id, this.$store.state.tripData)
+  },
+  methods: {
+    setPlace (x) {
+      console.log (x)
+      let oldDestinations = JSON.parse(JSON.stringify(this.$store.state.tripData.destinations))
+      const photo = x.photos[0].getUrl({
+        maxWidth: 640
+      });
+      const placeid =x.address_components[0].short_name
+      oldDestinations.push({
+        city: x.formatted_address,
+        interests: [],
+        advices: [],
+        photo,
+        placeid
+      })
+      
+      this.$store.commit('setTripData', {
+        key: 'destinations',
+        value: oldDestinations
+      })
+      this.$store.commit('setTripData', {
+        key: 'currentCity',
+        value: x.formatted_address
+      })
+
+    }
   }
 }
 </script>

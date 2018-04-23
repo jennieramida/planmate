@@ -1,21 +1,33 @@
 <template>
-  <section class="container1 _pdt-4px">
-    
-    <div class="_pdv-12px helve _fs-5 _fw-600">
-       Recommend places
+  <MyDefaultLayout>
+    <div>
+      <div class="lo-4 head">
+        <div class="_pdv-12px helve _fs-6 _fw-100 _tal-l _pdl-24px">
+          <nuxt-link to="/frdcity">
+            Cancel
+          </nuxt-link>
+        </div>
+        <div class="_pdv-12px helve _cl-white _tal-ct _fs-5 _fw-600" >
+          Add places
+        </div>
+        <div class="_pdv-12px helve  _fs-6 _fw-100 _tal-r _pdr-24px">
+          <nuxt-link to="/frdcity">
+            Done
+          </nuxt-link>
+        </div> 
+      </div>
     </div>
 
-    <div class="boxbg _mgt-4px">
-        <div class="helve _fw-600 _pdt-24px _cl-dark">
-            What does Vasse like?
+    <div>
+        <div class="helve _fs-5 _fw-600 _pdt-24px _cl-dark _pdl-24px _tal-l">
+            What's Thanya like?
         </div>
-        <div class="helve bluetext _fw-500 _fs-7 _pd-12px _pdh-24px _lh-125pct">
-            Cafe - Museum - Shopping - Street Food - Dessert - View Point - Design Store - Market - Craft Beer
+        <div class="_pdh-24px _mgt-12px _tal-l">
+          <IntTag v-for="(x, i) in tagData" :key="i" :id="x.id" :interest="x.interest"/>
         </div>
         <!-- Map-->
         <div class="_pdt-12px">
-          <div v-show="isShowing === 'place'">
-            <div class="whitebg _pdv-12px">
+            <div class="whitebg _pdv-12px _tal-ct">
                 <gmap-autocomplete
                 @place_changed="setPlace">
                 </gmap-autocomplete>
@@ -26,7 +38,7 @@
               :center="center"
               :zoom="7"
               map-type-id="terrain"
-              style="width: 100%; height: 67vh"
+              style="width: 100%; height: 68vh"
               >
               <gmap-marker
                 :key="index"
@@ -38,7 +50,7 @@
               ></gmap-marker>
               </gmap-map>
             </div> 
-          </div>
+ 
         </div> 
 
         <!-- Advice -->
@@ -47,18 +59,20 @@
         </div>
     </div>
 
-  </section>    
+  </MyDefaultLayout>   
 </template>
 
 <script>
-import AppLogo from '~/components/AppLogo.vue'
+import MyDefaultLayout from '~/layouts/MyDefaultLayout.vue'
 import Button from '~/components/MyButton.vue'
 import * as VueGoogleMaps from '~/node_modules/vue2-google-maps/src/main'
+import IntTag from '~/components/IntTag.vue'
 
 export default {
   components: {
-    AppLogo,
-    Button
+    MyDefaultLayout,
+    Button,
+    IntTag
   },
   data () {
     return {
@@ -69,7 +83,22 @@ export default {
         position: {lat: 10.0, lng: 10.0}
       }, {
         position: {lat: 11.0, lng: 11.0}
-      }]
+      }],
+      tagData: [
+        {
+          interest: 'Design Museum'
+      },{
+          interest: 'Gallery'
+      },{
+          interest: 'Coffee'
+      },{
+          interest: 'Local Food'
+      },{
+          interest: 'Park'
+      },{
+          interest: 'Jazz Bar'
+      }
+      ]
     }
   },
   methods: {
@@ -94,14 +123,9 @@ export default {
 </script>
 
 <style scoped>
-.container1 {
-  /* dont make the whole container a flexbox */
-  /* min-height: 100vh; */
-  /* display: flex;
-  justify-content: center;*/
-  align-items: center; 
-  text-align: center;
-  background-color: #69AFC0 ;
+
+.head {
+  background-color: #69AFC0;
 }
 
 .boxbg {
@@ -140,10 +164,4 @@ label {
     font-size: 16px;
 }
 
-.cityhead {
-    color: white;
-    font-family: 'Yeseva One', cursive;
-    font-size: 23px;
-    letter-spacing: 1.01px;
-}
 </style>

@@ -15,14 +15,21 @@
           <div class=" _pdh-12px _pdt-12px _mgt-12px _fw-100 _cl-dark _pdbt-0px">
             <form action="">     
               <div class="field">
-                <input type="TripName" name="TripName" id="TripName" placeholder="Add your trip name">
+                <input ref="tripNameInput" type="TripName" name="TripName" id="TripName" placeholder="Add your trip name"
+                  @change="updateTripName()" />
                 <label for="TripName">Trip Name</label>
               </div>
             </form>
+            <!-- {{ tripName }} -->
           </div>
 
         </div>
-      <Footer title='Next' link='/travelers' back='Back'></Footer>
+      <Footer 
+        title='Next'
+        :link='`/create/${$route.params.id}/travelers`'
+        back='Back'
+      >
+      </Footer>
     </MyDefaultLayout>
   </div>
 </template>
@@ -39,14 +46,35 @@ export default {
     Button,
     Header,
     Footer
+  },
+  data () {
+    return {
+      tripName: ''
+    }
+  },
+  created () {
+    console.log(this.$route)
+  },
+  methods: {
+    updateTripName () {
+      let title = this.$refs.tripNameInput.value
+      this.$store.commit('setTripData', {
+        key: 'title',
+        value: title
+      })
+      this.$store.commit('setTripData', {
+        key: 'id',
+        value: this.$route.params.id
+      })
+    }
   }
 }
 </script>
 
 <style>
-.fix {
+/* .fix {
   position: fixed;
-}
+} */
 form {
   margin: 10px 50px;
   margin-top: 50px;

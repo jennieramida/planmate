@@ -1,16 +1,15 @@
 <template>
-  
   <MyDefaultLayout>
     <div>
-      <div class="_tal-ct _pdbt-48px">
+      <div class="_tal-ct _pdbt-48px ">
         <img class="logo _mgv-32px _mgbt-48px" src="~/assets/logo.png">
       </div>
-      
+
       <slick ref="slick" :options="slickOptions">
         <!-- 1 -->
         <div class="slick-item">
           <img class="logosize" src="~/assets/logohome.png">
-          <div class="subtitle _lh-125pct _pdt-12px ">
+          <div class="subtitle _fs-5 _cl-black _fw-100 _lh-125pct _pdt-12px ">
             <p class="_fw-600 _dp-il">PLANMATE</p> is a Form Builder 
             <br/>for traveller which help planning trips
             <br/>by gathering data from friends!
@@ -53,21 +52,20 @@
           </div>
         </div>
       </slick>
-       <div class="_tal-ct _pd-24px _pdt-48px" @click="checkSignIn()">
-         <nuxt-link to="/signup">
-         <Button title="Create Form"/>
-         </nuxt-link>
-        </div>
-      
-        <div class="_tal-ct _fw-600 _pdbt-48px">
-          <nuxt-link to="/signin">
-            <span class="link">Sign In to Continue Existing Form</span>
-          </nuxt-link>
-        </div>
+
+      <div class="_tal-ct _pd-24px _pdt-48px">
+        <nuxt-link to="/signup">
+          <Button title="Create Form"/>
+        </nuxt-link>
+      </div>
+    
+      <div class="_tal-ct _fw-600 _pdbt-48px">
+        <nuxt-link to="/signin">
+          <span class="link">Sign In to Continue Existing Form</span>
+        </nuxt-link>
+      </div>
+
     </div>
-    <modal name="hello-world">
-      hello, world!
-    </modal>
   </MyDefaultLayout>
 </template>
 
@@ -77,27 +75,10 @@ import Slick from 'vue-slick'
 import Button from '~/components/MyButton.vue'
 
 export default {
-  data () {
-    return {
-      isSignedIn: true
-    }
-  },
   components: {
     MyDefaultLayout,
     Slick,
     Button
-  },
-  methods: {
-    checkSignIn () {
-      // console.log('clicked')
-      // this.$modal.show('hello-world');
-      if (this.isSignedIn) {
-        // go to create form
-        $router.go
-      } else {
-        // go to signup and display popup
-      }
-    }
   },
   data () {
     return {
@@ -106,7 +87,6 @@ export default {
         dots: true,
         infinite: false,
         arrows: false
-        // Any other options that can be got from plugin documentation
       },
     }
   }
@@ -115,36 +95,10 @@ export default {
 
 <style scoped>
 
-/* รู้ๆๆๆๆละ */
-
-.slick-item {
-  text-align: center;
-}
-
 .link {
   color: #477C89;
 }
 
-.subtitle {
-  font-family: Helvetica;
-  font-weight: 100;
-  font-size: 14px;
-  color: black;
-  letter-spacing: 1px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
-}
-.logo{
-  width: 210px;
-  height: 62px;
-}
-.icon{
-  margin-left: auto;
-  margin-right: auto;
-}
 .logosize {
   width: 192px;
   height:157px;
@@ -152,5 +106,8 @@ export default {
   margin-right: auto;
 }
 
-
+.icon {
+  margin-left: auto;
+  margin-right: auto;
+}
 </style>

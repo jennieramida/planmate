@@ -1,16 +1,18 @@
 <template>
   <div class="foot">
        <!-- Footer -->
-    <div class="footer _pdv-24px lo-4 _zid-1">
+    <div class="footer _pdv-24px lo-6 _zid-1">
       <div class="_tal-l _pdl-24px _pdbt-4px">
-        <a href="javascript: history.back()">
+        <a href="javascript: history.back()" v-if="backMode !== 'backToFriendPage'">
           <BackButton :back="back"/>
         </a>
+        <!-- Special case -->
+        <nuxt-link :to='`/a/${$route.params.id}/destinations`'
+        v-if="backMode === 'backToFriendPage'">
+          <BackButton :back="back"/>
+        </nuxt-link>
       </div>
 
-      <div>
-        <!-- emptyspace -->
-      </div>
 
       <div class="_tal-r _pdr-24px _pdbt-4px">
         <nuxt-link :to="link">
@@ -27,7 +29,7 @@ import Button from '~/components/MyButton.vue'
 import BackButton from '~/components/MyGreyButton.vue'
 
 export default {
-    props: ['link','title','back','link2'],
+    props: ['link','title','back','link2', 'backMode', 'p-data'],
     components: {
     Button,
     BackButton

@@ -6,38 +6,19 @@
           Interest
         </div>
         <div class="citytitle _fw-600 _fs-4 _pdt-4px">
-          Paris, France
+          {{ $store.state.tripData.currentCity }}
+        </div>
+        <div class="subtitle _fw-100 _fs-6 _pdt-4px">
+          What's your preference?
         </div>
       </div>
 
     <!-- Accordion – With Icon -->
-      <div class="_pdh-48px _fs-4 _pdt-48px _tal-l _pdbt-128px">
-      
-      <MyAccordion v-for="(x, i) in accordionData" :key="i" :id="x.id" :topic="x.title" :choices="x.choices" />
-
-      <!--
-      <MyAccordion Topic='Arts & Culture' Choice='Arts Museum' Choice2='Artist' key="0"></MyAccordion>
-
-      <MyAccordion Topic='Design & Architecture' Choice='Arts Museum' Choice2='Artist'  key="1"></MyAccordion>
-      
-      <MyAccordion Topic='Entertainment' Choice='Arts Museum' Choice2='Artist' key="2"></MyAccordion>
-
-      <MyAccordion Topic='Food Scene' Choice='Arts Museum' Choice2='Artist' key="3"></MyAccordion>
-  
-     <MyAccordion Topic='Night Life' Choice='Arts Museum' Choice2='Artist' key="4"></MyAccordion>
-
-      <MyAccordion Topic='Outdoor Activities' Choice='Arts Museum' Choice2='Artist' key="5"></MyAccordion>
-
-      <MyAccordion Topic='Parks, Nature & Zoo' Choice='Arts Museum' Choice2='Artist' key="6"></MyAccordion>
-
-      <MyAccordion Topic='Shopping' Choice='Arts Museum' Choice2='Artist' key="7"></MyAccordion>
-
-      <MyAccordion Topic='Sight Seeing' Choice='Arts Museum' Choice2='Artist' key="8"></MyAccordion>
-      -->
-
+    <div class="_pdh-48px _fs-4 _pdt-48px _tal-l _pdbt-128px">  
+      <MyAccordion v-for="(x, i) in accordionData" :key="i" :id="x.id" :topic="x.title" :choices="x.choices" v-on:sendCheckbox="receiveCheckbox"/>
     </div>
 
-        <Footer title='Next' link='/advice' back='Back'></Footer>
+        <Footer title='Next' link='/usercityadvice' back='Back'></Footer>
   </MyDefaultLayout>
 </template>
 
@@ -56,6 +37,18 @@ export default {
     Header,
     Footer,
     MyAccordion
+  },
+  methods: {
+    receiveCheckbox (x) {
+      console.log(x) // Art galleries
+      let oldDestinations = JSON.parse(JSON.stringify(this.$store.state.tripData.destinations))
+      let indexOfCurrentDestination = oldDestinations.findIndex((o) => o.city === this.$store.state.tripData.currentCity)
+      oldDestinations[indexOfCurrentDestination].interests.push(x)
+      this.$store.commit('setTripData', {
+        key: 'destinations',
+        value: oldDestinations
+      })
+    }
   },
   data () {
     return {

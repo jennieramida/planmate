@@ -11,7 +11,7 @@ module.exports = {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Yeseva+One' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Vibur'},
       { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/biomatic@0.1.4/dist/biomatic.full.min.css' },
       { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css' },
       { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css' }
@@ -34,7 +34,9 @@ module.exports = {
   */
   plugins: [
     '~/plugins/vue-google-maps.js',
-    '~/plugins/vue-js-modal'
+    '~/plugins/vue-js-modal',
+    '~/plugins/vuefire.js',
+    '~/plugins/vue-clipboard'
   ],
   build: {
     /*
