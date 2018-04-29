@@ -9,4 +9,15 @@
   
 .slick-dots li.slick-active button:before {
     color: #69AFC0;
+    
+}
+
+body {
+    width: 450px;
+}
+
+@media only screen and (max-width: 420px) {
+    body {
+        width: 100% !important;
+    }
 }

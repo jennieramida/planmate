@@ -2,7 +2,7 @@
   <MyDefaultLayout>
     <Header></Header>
     <div class="mapBg">
-      <div class="_tal-ct _mgt-64px _pdt-64px">
+      <div class="_tal-ct _mgt-64px _mgbt-24px _pdt-64px">
         <img class="" src="~/assets/callforhelp.png">
       </div>
   
@@ -63,9 +63,9 @@
         username: ''
       }
     },
-    created () {
-      this.$store.commit('setFormData', this.trip)
-    },
+    // created () {
+    //   this.$store.commit('setFormData', this.trip)
+    // },
     methods: {
       updateUserName() {
         // let username = this.$refs.UserNameInput.value

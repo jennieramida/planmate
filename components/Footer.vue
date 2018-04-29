@@ -1,5 +1,5 @@
 <template>
-  <div class="foot">
+  <div class="footWidth foot">
        <!-- Footer -->
     <div class="footer _pdv-24px lo-6 _zid-1">
       <div class="_tal-l _pdl-24px _pdbt-4px">
@@ -51,6 +51,19 @@ export default {
   }
 
 
+
+  .footWidth {
+    width: 450px;
+  }
+
+  @media only screen and (max-width: 450px) {
+    .footWidth {
+      width: 100% !important;
+    }
+    .footer {
+      min-width: 10vh;
+    }
+  }
 
     .BC {
         background-color: #F8F7F7;

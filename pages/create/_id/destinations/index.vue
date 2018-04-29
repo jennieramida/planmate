@@ -10,19 +10,16 @@
         </div>
       </div>
 
-      <div class=" _pdh-12px _pdt-12px _mgt-12px _fw-100 _cl-dark">
+      <div class="_tal-ct _pdh-12px _pdt-12px _mgt-12px _fw-100 _cl-dark _pdbt-256px">
         <form action="">     
-          <div class="field">
+          <div class=" _pdl-24px field">
             <gmap-autocomplete
                 @place_changed="setPlace">
             </gmap-autocomplete>
           </div>
         </form>
       </div>
-      <div class="subtitle _fw-100 _fs-6">
-          Woooo! Bonjour!
-        </div>
-        <Footer title='Next' :link='`/create/${$route.params.id}/interests`' back='Back'></Footer>
+        <Footer title='Next' :link='`/create/${$route.params.id}/destinations/${placeid}/interests`' back='Back'></Footer>
   </MyDefaultLayout>
 </template>
 
@@ -40,41 +37,55 @@ export default {
     Header,
     Footer
   },
-  mounted () {
-    // update tripData
-    Firebase.updateForm(this.$store.state.tripData.id, this.$store.state.tripData)
+  data () {
+    return {
+      placeid: ''
+    }
   },
   methods: {
     setPlace (x) {
       console.log (x)
-      let oldDestinations = JSON.parse(JSON.stringify(this.$store.state.tripData.destinations))
+      let lat = x.geometry.location.lat()
+      let lng = x.geometry.location.lng()
+      console.log(lat)
+      console.log(lng)
+      // let oldDestinations = JSON.parse(JSON.stringify(this.$store.state.tripData.destinations))
       const photo = x.photos[0].getUrl({
         maxWidth: 640
       });
-      const placeid =x.address_components[0].short_name
-      oldDestinations.push({
+      const placeid = x.address_components[0].short_name
+      this.placeid = placeid
+      // console.log(this.$route.params.id)
+      let destinations = this.$store.state.forms[this.$route.params.id].destinations || {}
+      console.log(destinations)
+      destinations[placeid] = {
         city: x.formatted_address,
         interests: [],
         advices: [],
         photo,
-        placeid
+        placeid,
+        lat,
+        lng
+      }
+      // console.log (destinations)
+      Firebase.updateForm(this.$store.state.UID, this.$route.params.id, {
+        destinations
       })
-      
-      this.$store.commit('setTripData', {
-        key: 'destinations',
-        value: oldDestinations
-      })
-      this.$store.commit('setTripData', {
-        key: 'currentCity',
-        value: x.formatted_address
-      })
+      // this.$store.commit('setTripData', {
+      //   key: 'destinations',
+      //   value: oldDestinations
+      // })
+      // this.$store.commit('setTripData', {
+      //   key: 'currentCity',
+      //   value: x.formatted_address
+      // })
 
     }
   }
 }
 </script>
 
-<style>
+<style scoped>
 
 form {
   margin: 10px 50px;

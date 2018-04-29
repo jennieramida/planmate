@@ -3,7 +3,7 @@ module.exports = {
   ** Headers of the page
   */
   head: {
-    title: 'togather',
+    title: 'PLANMATE | Travel with data from friends',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -14,10 +14,14 @@ module.exports = {
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Vibur'},
       { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/biomatic@0.1.4/dist/biomatic.full.min.css' },
       { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css' },
-      { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css' }
+      { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css' },
+      { rel: 'stylesheet', href: 'https://unpkg.com/element-ui/lib/theme-chalk/index.css' },
+      // { rel: 'stylesheet', href: 'path/to/font-awesome/css/font-awesome.min.css'}
       // 5555 แม่งมี bug แป้บนะ 
-      
-    ]
+    ],
+    script: [
+      { src: 'https://unpkg.com/element-ui/lib/index.js' }
+    ],
   },
   /*
   ** Customize the progress bar color
@@ -36,8 +40,14 @@ module.exports = {
     '~/plugins/vue-google-maps.js',
     '~/plugins/vue-js-modal',
     '~/plugins/vuefire.js',
-    '~/plugins/vue-clipboard'
+    '~/plugins/vue-clipboard',
+    '~/plugins/element-ui'
+    
+
   ],
+  generate: {
+    dir: 'dist'
+  },
   build: {
     /*
     ** Run ESLint on save

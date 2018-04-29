@@ -2,7 +2,9 @@
   <MyDefaultLayout>
     <Header></Header>
     <div class="cityhead helve _pdv-24px _mgt-48px _mgbt-0px">
-       <div class="_pdt-16px">{{ city.city }}</div>
+       <div class="_pdt-16px">{{ city.city }}
+         
+       </div>
     </div>
 
     <div class="boxbg _mgbt-0px">
@@ -14,7 +16,7 @@
         <div v-show="isShowing === 'place'">  
           <gmap-map
           :center="center"
-          :zoom="10"
+          :zoom="12"
           map-type-id="terrain"
           style="width: 100%; height: 62vh"
           >
@@ -34,18 +36,29 @@
           <div v-show="isShowing === 'advice'">
             <div class="advicebox">
 
-              <div class="" v-for="(x, i) in $store.state.formData.destinations" :key="i">
+            <div class="_pdh-48px _tal-l _pdv-24px _pdbt-128px">
+              <div class="" v-for="(advice, i) in city.advices" :key="i">
+                  <div class="_pdt-8px">{{ advice }}</div>
+            
+                  <div class="_tal-r _pdv-24px" @click="toggleComment">
+                  0 comment
+                  </div>
 
-                  <div class="_pdt-8px">{{ x.advices }}</div>
-
+                  <div v-if="isCommentActive">
+                    <div class="bio-textarea _pdbt-24px">
+                      <textarea rows="5" placeholder="Give your advice">
+                      </textarea>
+                    </div>
+                  </div>
+                  <div class="line"></div>
               </div>
-
+            </div> 
 
             </div>
           </div>
         </div>
     </div>
-    <Footer title='Add Places' :link='`/a/${$route.params.id}/destinations/_city/addplace`' back='Back' backMode="backToFriendPage"></Footer>
+    <Footer title='Add Places' :link='`/a/${$route.params.id}/destinations/${$route.params.city}/addplace`' back='Back' backMode="backToFriendPage"></Footer>
   </MyDefaultLayout>
 </template>
 
@@ -67,10 +80,14 @@ export default {
   },
   data () {
     return {
-      city: '',
+      city: {},
       place: null,
       isShowing: 'place',
-      center: {lat: 10.0, lng: 10.0},
+      isCommentActive: false,
+      center: {
+        lat: 0,
+        lng: 0
+      },
       markers: [{
         position: {lat: 10.0, lng: 10.0}
       }, {
@@ -78,12 +95,17 @@ export default {
       }],
     }
   },
-  mounted () {
-    let cityParam = this.$route.params.city // -> Paris, France
-    let cityData = this.$store.state.formData.destinations.filter(x => x.city === cityParam)
+  created () {
+    let cityParam = this.$route.params.city
+    console.log(cityParam)
+    let cityData = this.$store.state.formData.destinations.filter(x => x.placeid === cityParam)
+    console.log(cityData)
     this.city = cityData[0]
+    this.center = {
+      lat: cityData[0].lat,
+      lng: cityData[0].lng
+    }
   },
-
   methods: {
     setPlace (place) {
       this.place = place
@@ -92,14 +114,17 @@ export default {
       if (this.place) {
         this.markers.push({
           position: {
-            lat: this.place.geometry.location.lat(),
-            lng: this.place.geometry.location.lng(),
+            lat: this.$store.state.formData.destinations.lat,
+            lng: this.$store.state.formData.destinations.lng,
           }
         })
         this.center.lat = this.place.geometry.location.lat()
         this.center.lng = this.place.geometry.location.lng()
         this.place = null;
       }
+    },
+    toggleComment() {
+      this.isCommentActive = !this.isCommentActive
     }
   }
 }
@@ -145,6 +170,12 @@ export default {
 
 .advicebox {
   background-color: white;
+}
+
+.line {
+  padding-top: 1px;
+  background-color: #69AFC0;
+  margin-bottom: 24px;
 }
 </style>
 

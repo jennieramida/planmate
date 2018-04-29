@@ -10,7 +10,7 @@
           Who will you travel with?
         </div>
 
-        <div class="radio _tal-l _pdl-64px _pdt-12px _mgt-12px _fw-100 _cl-dark">
+        <div class="radio _tal-l _pdl-64px _pdt-12px _mgt-12px _fw-100 _cl-dark _pdbt-256px">
           <div class="bio-radio _pdv-8px">
             <input id="r1" type="radio" name="radio-test1" @change="updateTravelType(0)" checked>
             <label for="r1">
@@ -66,20 +66,12 @@ export default {
     Header,
     Footer
   },
-  mounted () {
-    // update tripData
-    // Default type
-    this.$store.commit('setTripData', {
-      key: 'travelType',
-      value: 0
-    })
-    Firebase.updateForm(this.$store.state.tripData.id, this.$store.state.tripData)
-  },
   methods: {
-    updateTravelType (id) {
-      this.$store.commit('setTripData', {
-        key: 'travelType',
-        value: id
+    updateTravelType (type) {
+      // let travelType = this.$refs.travelTypeInput.value
+      console.log(type)
+      Firebase.updateForm(this.$store.state.UID, this.$route.params.id, {
+       travelType: type
       })
     }
   }
@@ -106,7 +98,7 @@ form {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     width: 25px;
-    height: 25px;
+    height: 24px;
     top: -2px;
     left: 0px;
     border: 2px solid;
@@ -120,7 +112,7 @@ form {
     height: 14px;
     width: 14px;
     top: 3px;
-    left: 5.5px;
+    left: 5.6px;
     background-color: #477C89;
     border-color:#477C89;
     border-radius: 50%;

@@ -3,22 +3,22 @@
     <Header hasBC="true"></Header>
       <div class="_pdt-64px _mgt-24px _tal-ct _cl-black">
         <div class="_fw-800 _pdt-64px _fs-2 _pdt-12px">
-          {{ $store.state.tripData.title }}
+          {{ title }}
         </div>
         <div class="subtitle _fw-100 _fs-6 _pdt-4px">
           Add all your cities
         </div>
       </div>
 
-      <div class="lo-6 _pdt-12px _pdbt-128px">
-
-        <div class="_fw-100 _fs-6 _pdt-24px _mgh-24px" v-for="(x, i) in $store.state.tripData.destinations" :key="i">
-          <img class="citiesimg" :src="x.photo">
-          <div class="_pdt-8px">{{ x.city }}</div>
+      <div class="lo-6 _pdt-12px _pdbt-256px _mgh-24px" v-if="$store.state.forms[$route.params.id] && $store.state.forms[$route.params.id].destinations">
+        <div class="_fw-100 _fs-6 _pdt-24px " v-for="(value, key, index) in $store.state.forms[$route.params.id].destinations" :key="index">
+          <div class="_h-128px _bgrp-nrp _bgs-cv _bgpst-ct" :style="`background-image: url(${value.photo || 'http://via.placeholder.com/350x150'})`">
+          </div>
+          <div class="_pdt-8px">{{ value.city }}</div>
         </div>
 
 
-        <div class="more _mgv-24px _mgh-24px _fs-6 _fw-600 _tal-ct">
+        <div class="more _mgv-24px _mgh-12px _fs-6 _fw-600 _tal-ct">
             <nuxt-link :to='`/create/${$route.params.id}/destinations`'>
               Add more city              
             </nuxt-link>
@@ -49,10 +49,17 @@ export default {
     Header,
     Footer
   },
-    mounted () {
-    // update tripData
-    Firebase.updateForm(this.$store.state.tripData.id, this.$store.state.tripData)
-  },
+    
+    computed: {
+    title () {
+      if (!this.$store.state.forms[this.$route.params.id]) {
+        return 'Thinking...'
+      } else {
+        return this.$store.state.forms[this.$route.params.id].title
+      }
+    }
+  }
+  
 }
 </script>
 
@@ -67,12 +74,20 @@ export default {
   border-color: #69AFC0;
   color :  #69AFC0;
   border-width: 1px;
+    width: 180px;
+  height: 120px;
+     background-color: transparent;
+    -webkit-text-decoration-skip: objects;
+    text-decoration: none;
+    color: #69AFC0 !important;
 }
 
 .citiesimg {
   width: 180px;
+  height: 120px;
   border-radius: 6px;
 }
+
 </style>
 
 

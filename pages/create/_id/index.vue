@@ -12,9 +12,9 @@
             Please name your trip
           </div>
 
-          <div class=" _pdh-12px _pdt-12px _mgt-12px _fw-100 _cl-dark _pdbt-0px">
+          <div class=" _pdh-12px _pdt-12px _mgt-12px _fw-100 _cl-dark _pdbt-256px">
             <form action="">     
-              <div class="field">
+              <div class="_pdl-24px field">
                 <input ref="tripNameInput" type="TripName" name="TripName" id="TripName" placeholder="Add your trip name"
                   @change="updateTripName()" />
                 <label for="TripName">Trip Name</label>
@@ -39,6 +39,7 @@ import MyDefaultLayout from '~/layouts/MyDefaultLayout.vue'
 import Button from '~/components/MyButton.vue'
 import Header from '~/components/Header.vue'
 import Footer from '~/components/Footer.vue'
+import * as Firebase from '~/services/firebase'
 
 export default {
   components: {
@@ -58,13 +59,8 @@ export default {
   methods: {
     updateTripName () {
       let title = this.$refs.tripNameInput.value
-      this.$store.commit('setTripData', {
-        key: 'title',
-        value: title
-      })
-      this.$store.commit('setTripData', {
-        key: 'id',
-        value: this.$route.params.id
+      Firebase.updateForm(this.$store.state.UID, this.$route.params.id, {
+       title
       })
     }
   }

@@ -6,7 +6,7 @@
           Advice
         </div>
         <div class="citytitle _fw-600 _fs-4 _pdt-4px">
-          {{ $store.state.tripData.currentCity }}
+          {{ city }}
         </div>
         <div class="subtitle _fw-100 _fs-6 _pdt-4px">
           What do you need to know?
@@ -18,7 +18,7 @@
       <MyAdvice v-for="(x, i) in accordionData" :key="i" :id="x.id" :topic="x.title" v-on:sendAdvice="receiveAdvice"/>
     </div>
 
-    <Footer title='Finish this city' back='Back' link='/useraddmorecity'></Footer>
+    <Footer title='Finish this city' back='Back' :link='`/create/${$route.params.id}/cities`'></Footer>
   </MyDefaultLayout>
 </template>
 
@@ -28,7 +28,7 @@ import Button from '~/components/MyButton.vue'
 import Header from '~/components/Header.vue'
 import Footer from '~/components/Footer.vue'
 import MyAdvice from '~/components/MyAdvice.vue'
-
+import * as Firebase from '~/services/firebase'
 
 export default {
   components: {
@@ -41,13 +41,30 @@ export default {
   methods: {
     receiveAdvice (x) {
       console.log(x) // Art galleries
-      let oldDestinations = JSON.parse(JSON.stringify(this.$store.state.tripData.destinations))
-      let indexOfCurrentDestination = oldDestinations.findIndex((o) => o.city === this.$store.state.tripData.currentCity)
-      oldDestinations[indexOfCurrentDestination].advices.push(x)
-      this.$store.commit('setTripData', {
-        key: 'destinations',
-        value: oldDestinations
+      // let oldDestinations = JSON.parse(JSON.stringify(this.$store.state.tripData.destinations))
+      // let indexOfCurrentDestination = oldDestinations.findIndex((o) => o.city === this.$store.state.tripData.currentCity)
+      // oldDestinations[indexOfCurrentDestination].advices.push(x)
+      // this.$store.commit('setTripData', {
+      //   key: 'destinations',
+      //   value: oldDestinations
+      // })
+      this.$store.commit('setDestinationAdvices', {
+        formId: this.$route.params.id,
+        destinationKey: this.$route.params.placeid,
+        advice: x
       })
+      Firebase.updateForm(this.$store.state.UID, this.$route.params.id, {
+        destinations: this.$store.state.forms[this.$route.params.id].destinations
+      })
+    
+    }
+  }, computed: {
+    city () {
+      if (!this.$store.state.forms[this.$route.params.id]) {
+        return 'traveling...'
+      } else {
+        return this.$store.state.forms[this.$route.params.id].destinations[this.$route.params.placeid].city
+      }
     }
   },
   data () {

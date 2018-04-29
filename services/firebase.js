@@ -1,25 +1,23 @@
 import firebase from 'firebase'
 
-// Initialize Firebase
-const config = {
-	apiKey: "AIzaSyDzRVkzJTF0KCSt7dPh6t78QPzIB4r9uaw",
-	authDomain: "thesis-jennie.firebaseapp.com",
-	databaseURL: "https://thesis-jennie.firebaseio.com",
-	projectId: "thesis-jennie",
-	storageBucket: "thesis-jennie.appspot.com",
-	messagingSenderId: "268204212440"
-}
-
 function init () {
-	console.log('init firebase')
+	const config = {
+		apiKey: "AIzaSyDzRVkzJTF0KCSt7dPh6t78QPzIB4r9uaw",
+		authDomain: "thesis-jennie.firebaseapp.com",
+		databaseURL: "https://thesis-jennie.firebaseio.com",
+		projectId: "thesis-jennie",
+		storageBucket: "thesis-jennie.appspot.com",
+		messagingSenderId: "268204212440"
+	}
 	if (!firebase.apps.length) return firebase.initializeApp(config)
+	return
 }
 
-function updateForm (id, tripData = {}) {
+function updateForm (uid, formId, data = {}) {
 	return firebase
 		.database()
-		.ref('form/' + id)
-		.set(tripData)
+		.ref('/user/' + uid + '/forms/' + formId)
+		.update(data)
 }
 
 function retrieveForm (id) {

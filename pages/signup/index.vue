@@ -3,13 +3,65 @@
     <Header></Header>
     <div class="_pdt-128px _tal-ct _cl-black">
       <div class="_fw-800 _fs-2 _pdt-12px">
-        Sign Up
+        Get Started
       </div>
       <div class="subtitle _fw-100 _fs-6 _pdt-4px">
-        We try to know you little bit more
+        Welcome to Planmate, get started absolutely free.
       </div>
 
-      <div class=" _pdh-12px _pdt-12px _mgt-12px _fw-100 _cl-dark">
+      <!-- <div class="subtitle _fw-100 _fs-6 _pdt-4px">
+        Due to demo site please continue with Facebook
+      </div> -->
+
+      <div class="_pdbt-24px _pdh-12px _pdt-48px">
+        <nuxt-link to="/userpage">
+          <Button title="Continue with Facebook" />
+        </nuxt-link>
+         <div class="_fw-100 _pdt-12px _fs-8 _pdh-48px">
+          By clicking "Continue" I agree to Planmate's 
+          <br/><u>Terms of Service</u> and <u>Privacy Policy.</u>
+        </div>
+      </div>
+
+      <div class="subtitle _fw-100 _fs-6 _pdt-8px">
+        or
+      </div>
+
+     
+        <div class="_tal-l _pdh-64px _cl-dark _pdbt-48px">
+          <div class="bio-field -disabled _pdt-24px">
+            <div class="_pdv-8px _fs-7 _fw-600 ">
+              E-mail Address
+            </div>
+            <div class="bio-input">
+              <input disabled>
+            </div>
+          </div>
+
+           <div class="bio-tooltip" data-tooltip="Due to demo site please continue with Facebook">
+          <div class="bio-field -disabled _pdt-24px">
+            <div class="_pdv-8px _fs-7 _fw-600 ">
+              Name
+            </div>
+            <div class="bio-input">
+              <input disabled>
+            </div>
+          </div>
+             </div> 
+
+          <div class="bio-field -disabled _pdt-24px">
+            <div class="_pdv-8px _fs-7 _fw-600 ">
+              Password
+            </div>
+            <div class="bio-input">
+              <input disabled>
+            </div>
+          </div>
+        </div>
+   
+            
+
+      <!-- <div>
         <form action="">
           <div class="field">
             <input type="text" name="fullname" id="fullname" placeholder="Jane Appleseed">
@@ -25,10 +77,10 @@
             <input type="password" name="password" id="password" placeholder="Use alphabet and numbers">
             <label for="password">Password</label>
           </div>
-          </form>
-      </div>
+        </form>
+      </div> -->
 
-      <div class="_tal-ct _pd-24px _pdbt-64px">
+      <!-- <div class="_tal-ct _pd-24px _pdbt-64px">
         <div class="_fw-100 _dp-il">
           Already have an account?
         </div>
@@ -37,13 +89,9 @@
           Sign In
           </nuxt-link>
         </div>
-      </div>
+      </div> -->
       
-      <div class="_pdbt-24px">
-        <nuxt-link to="/signupcomplete">
-          <Button title="Sign Up" />
-        </nuxt-link>
-      </div>
+    
     </div>
   </MyDefaultLayout>
 </template>
@@ -134,6 +182,7 @@ input:focus + label {
   transform: translate(0, 0) scale(1);
   cursor: pointer;
 }
+
 </style>
 
 

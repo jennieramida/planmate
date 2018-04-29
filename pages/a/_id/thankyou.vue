@@ -1,8 +1,8 @@
 <template>
   <MyDefaultLayout>
     <Header></Header>
-    <div>
-      <div class="_pdt-128px">
+    <div class="mapBg">
+      <div class="_pdt-128px _mgt-24px">
         <img class="icon" src="~/assets/thankyou.png">
         <div class="title _fw-600 _fs-4 _pdt-48px">
           Having a trip?
@@ -39,6 +39,11 @@ export default {
 </script>
 
 <style>
+  .mapBg {
+    background-image: url(~/assets/mapline.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
 
 .img {
   width: 120%;

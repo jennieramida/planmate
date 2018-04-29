@@ -1,6 +1,4 @@
-var Vue = require('vue')
-var VueFire = require('vuefire')
-var firebase = require('firebase')
+import Vue from 'vue'
+import * as Auth from '~/services/firebase'
 
-// explicit installation required in module environments
-// Vue.use(VueFire)
+Auth.init()

@@ -1,6 +1,9 @@
 {
   "database": {
-    "rules": "database.rules.json"
+    "rules": {
+      ".read": true,
+      ".write": true
+    }
   },
   "hosting": {
     "public": "dist",

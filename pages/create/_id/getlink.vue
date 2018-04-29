@@ -10,50 +10,53 @@
       </div>
     </div>
 
-    <div class="bluebox _tal-l _pd-24px _mgv-24px _mgh-48px">
-      <div class="_fw-600 _fs-6 _pdbt-2px bluetext">
-        URL:
-      </div>
-        
-      <div class="_dp-f _fdrt-r _alit-ct"> 
-        <div class="bio-input -positive">
-          <input type="text" :value="`https://planmate.city/answer/${$route.params.id}`">
+    <div class="bluebox _tal-ct _mgh-48px">
+      <div class=" _tal-l _pdl-48px _pd-24px _mgv-24px ">
+        <div class="_fw-600 _fs-6 _pdbt-2px bluetext">
+          URL:
         </div>
-        <div class="bio-button _pd-4px _mg-4px _fs-6"
-        v-clipboard:copy="thingToCopy"
-        v-clipboard:success="onCopy"
-        v-clipboard:error="onError">
-          COPY
-        </div>       
-      </div>
+          
+        <div class="_dp-f _fdrt-r _alit-ct"> 
+          <div class="bio-input -positive">
+            <input type="text" :value="`https://planmate.city/a/${$route.params.id}`">
+          </div>
+          <div class="bio-button _pd-4px _mg-4px _fs-6"
+          v-clipboard:copy="thingToCopy"
+          v-clipboard:success="onCopy"
+          v-clipboard:error="onError">
+            COPY
+          </div>       
+        </div>
 
-      <div class="_fs-8 _pdv-4px textred">
-        This form will expire in 15 days.
-      </div>
-   
-      <div class="_fs-7 _fw-600 _pdt-12px bluetext">
-        Share on social media or send by email:
-      </div>
+        <div class="_fs-8 _pdv-4px textred">
+          This form will expire in 15 days.
+        </div>
+    
+        <div class="_fs-7 _fw-600 _pdt-12px bluetext">
+          Share on social media or send by email:
+        </div>
 
-      <div class="_dp-f _fdrt-r">
-        <img class="social" src="~/assets/fb.png">
-        <img class="social" src="~/assets/tw.png">
-        <img class="social" src="~/assets/ig.png">
-        <img class="social" src="~/assets/li.png">
-        <img class="social" src="~/assets/gg.png">
+        <div class="_dp-f _fdrt-r">
+          <img class="social" src="~/assets/fb.png">
+          <img class="social" src="~/assets/tw.png">
+          <img class="social" src="~/assets/ig.png">
+          <img class="social" src="~/assets/li.png">
+          <img class="social" src="~/assets/gg.png">
+        </div>
       </div>
     </div>
 
     <div class="_tal-ct _pdbt-12px">
       <img class="" src="~/assets/saveyourform.png">
       <div class="_pd-8px _fs-7">
-        To keep the form last long just Go Premium 
+        To keep the form last long just 
+        <nuxt-link class="_fw-600" to="/premium">Go Advance</nuxt-link>
         <br/>
         with Planmate in easy steps and get all the benefits.
       </div>        
     </div>
 
-    <div class="_pdt-24px">
+    <div class="_pdt-12px _pdbt-48px">
       <nuxt-link to="/userpage">
         <Button title="Back to my page"/>
       </nuxt-link>
@@ -78,8 +81,8 @@ export default {
   },
     mounted () {
     // update tripData
-    Firebase.updateForm(this.$store.state.tripData.id, this.$store.state.tripData)
-    this.thingToCopy = `https://planmate.city/answer/${this.$route.params.id}`
+    // Firebase.updateForm(this.$store.state.tripData.id, this.$store.state.tripData)
+    this.thingToCopy = `https://planmate.city/a/${this.$route.params.id}`
   },
   data() {
     return {
@@ -144,6 +147,13 @@ export default {
     border: 1px solid #69AFC0;
 }
 
+
+  a {
+    background-color: transparent;
+    -webkit-text-decoration-skip: objects;
+    text-decoration: none;
+    color: #69AFC0 !important;
+}
 </style>
 
 

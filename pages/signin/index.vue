@@ -35,7 +35,7 @@
       </div>
       
       <div class="_pdbt-24px">
-        <nuxt-link to="/signupcomplete">
+        <nuxt-link to="userpage">
           <Button title="Sign in" />
         </nuxt-link>
       </div>

@@ -1,16 +1,19 @@
 <template>
   <MyDefaultLayout>
     <div>
-      <div class="_tal-ct _pdbt-48px ">
-        <img class="logo _mgv-32px _mgbt-48px" src="~/assets/logo.png">
+      <div class="_tal-ct _pdbt-12px ">
+        <img class="logo _mgv-32px _mgbt-64px" src="~/assets/logo.png">
       </div>
 
       <slick ref="slick" :options="slickOptions">
         <!-- 1 -->
         <div class="slick-item">
           <img class="logosize" src="~/assets/logohome.png">
-          <div class="subtitle _fs-5 _cl-black _fw-100 _lh-125pct _pdt-12px ">
-            <p class="_fw-600 _dp-il">PLANMATE</p> is a Form Builder 
+          <div class="_fs-4 _fw-600 _pdt-24px _pdbt-12px">
+            Welcome to Planmate
+          </div>
+          <div class="subtitle _lh-125pct _pdbt-24px">
+            Planmate is a Form Builder 
             <br/>for traveller which help planning trips
             <br/>by gathering data from friends!
           </div>
@@ -21,7 +24,7 @@
           <div class="_fs-4 _fw-600 _pd-12px">
             Tell us your preferences
           </div>
-          <div class="subtitle _lh-125pct _pdbt-48px">
+          <div class="subtitle _lh-125pct _pdbt-24px">
             Create your own form which 
             <br/>contains destinations,
             <br/>preferences and specific needs
@@ -33,7 +36,7 @@
           <div class="_fs-4 _fw-600 _pd-12px">
             Spread your form
           </div>
-          <div class="subtitle _lh-125pct _pdbt-48px">
+          <div class="subtitle _lh-125pct _pdbt-24px">
             Gathering data and advice from 
             <br/>your friends by send your form’s link 
             <br/>to them and just wait!
@@ -45,7 +48,7 @@
           <div class="_fs-4 _fw-600 _pd-12px">
             Let's go exploring!
           </div>
-          <div class="subtitle _lh-125pct _pdbt-48px">
+          <div class="subtitle _lh-125pct _pdbt-24px">
             Choose what suit you and simply
             <br/>generate form into travel plan,
             <br/>Then just go travel!
@@ -53,7 +56,7 @@
         </div>
       </slick>
 
-      <div class="_tal-ct _pd-24px _pdt-48px">
+      <div class="_tal-ct _pd-12px _pdt-48px _mgbt-12px _pdbt-24px">
         <nuxt-link to="/signup">
           <Button title="Create Form"/>
         </nuxt-link>
@@ -66,6 +69,7 @@
       </div>
 
     </div>
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
   </MyDefaultLayout>
 </template>
 
@@ -100,8 +104,8 @@ export default {
 }
 
 .logosize {
-  width: 192px;
-  height:157px;
+
+  height: 23vh;
   margin-left: auto;
   margin-right: auto;
 }
@@ -110,4 +114,6 @@ export default {
   margin-left: auto;
   margin-right: auto;
 }
+
+
 </style>

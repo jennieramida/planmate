@@ -16,9 +16,9 @@
       store
     }) {
       // Connect to firebase and reserve a dsatabase entry
-      const id = Math.random().toString(36).substr(2, 9);
-      await Firebase.init()
-      return Firebase.updateForm(id).then((x) => redirect('/create/' + id))
+      const newFormId = Math.random().toString(36).substr(2, 9);
+      const uid = store.state.UID
+      return Firebase.updateForm(uid, newFormId).then((x) => redirect('/create/' + newFormId))
     }
   }
 </script>

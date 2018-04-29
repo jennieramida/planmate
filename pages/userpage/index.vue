@@ -19,10 +19,7 @@
             <nuxt-link to="/create">
             <Button title="Create New Form" />
             </nuxt-link>
-            <div class=" _pdt-12px subtitle _fw-100 _fs-7 _pdt-2px _pdbt-12px">
-                Let's gather data from friends
-                <br/>to create your plan
-            </div>
+
         </div>
 
         <div class=" _mgh-64px">
@@ -36,10 +33,10 @@
             </div>
         </div>
             <!-- All Form -->
-            <div class="lo-6 _pdt-12px">
-              <div class="_tal-r">
+            <div class="lo-6 _pdt-12px _pdbt-64px">
+              <!-- <div class="_tal-r">
                 <div>
-                  <nuxt-link to="/frdhome">
+                  <nuxt-link to="/form/id">
                     <img class="_pd-8px" src="~/assets/venice.png">
                   </nuxt-link>
                 </div>
@@ -56,7 +53,13 @@
                 <img class="_pd-8px" src="~/assets/venice.png">
                 </div>
               </div>
-            </div>        
+            </div>         -->
+            <nuxt-link :to="`/form/${key}`" v-for="(value, key, index) in $store.state.forms" :key="index">
+              <div class="_h-128px _bgrp-nrp _bgs-cv _bgpst-ct" :style="`background-image: url(${value.destinations && Object.values(value.destinations)[0].photo || 'http://via.placeholder.com/350x150'})`">
+              </div>
+              <h4>{{ value.title }}</h4>
+            </nuxt-link>
+          </div>
     </div>
   </MyDefaultLayout>
 </template>
@@ -65,7 +68,7 @@
 import MyDefaultLayout from '~/layouts/MyDefaultLayout.vue'
 import Button from '~/components/MyButton.vue'
 import Header from '~/components/Header.vue'
-
+import firebase from 'firebase'
 export default {
   components: {
     MyDefaultLayout,
