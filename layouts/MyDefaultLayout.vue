@@ -56,10 +56,21 @@ export default {
     },
     fetchDatabase (uid) {
       let that = this
-      firebase.database().ref('/user/' + uid)
-        .on('value', (snapshot) => {
-          that.$store.commit('setExistingForms', snapshot.val())
-        })
+      if (this.$route.path.indexOf('/create/') > -1) {
+        firebase.database().ref('/user/' + uid)
+          .on('value', (snapshot) => {
+            that.$store.commit('setExistingForms', snapshot.val())
+          })
+      }
+      if (this.$route.path.indexOf('/a/') > -1) {
+        // when answering
+        let uid = this.$route.params.uid
+        let formId = this.$route.params.formId
+        firebase.database().ref('/user/' + uid + '/forms/' + formId)
+          .on('value', (snapshot) => {
+            that.$store.commit('setCurrentForm', snapshot.val())
+          })
+      }
     }
   }
 }

@@ -40,7 +40,9 @@ export const state = () => ({
 			title: 'x',
 			travelType: ''
 		}
-	}
+	},
+	// currently answering form
+	currentForm: {}
 })
 
 export const mutations = {
@@ -57,6 +59,9 @@ export const mutations = {
 	},
 	setUID(state, uid) {
 		state.UID = uid
+	},
+	setCurrentForm (state, form) {
+		state.currentForm = form
 	},
 	setExistingForms (state, forms) {
 		state.forms = forms.forms
@@ -108,11 +113,5 @@ export const mutations = {
 		// 	// dest.advices = [{advice}, {}]
 			
 		// }
-	}
-}
-
-export const actions = {
-	async nuxtServerInit({ commit }, { req }) {
-		return await Firebase.init()
 	}
 }

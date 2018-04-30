@@ -20,7 +20,7 @@
       </div>
   
       <div class="_tal-ct _mgbt-12px _pdbt-24px _pdt-24px ">
-        <nuxt-link :to='`/a/${$route.params.id}/destinations`'>
+        <nuxt-link :to='`/a/${$route.params.uid}/${$route.params.formId}/destinations`'>
           <Button title="Give a hand" />
         </nuxt-link>
       </div>

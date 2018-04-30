@@ -44,11 +44,11 @@
               </div>
             </div> -->
 
-        <div class="lo-6 _pdt-12px _pdbt-256px _mgh-24px" v-if="$store.state.forms[$route.params.id] && $store.state.forms[$route.params.id].destinations">
+        <div class="lo-6 _pdt-12px _pdbt-256px _mgh-24px" v-if="$store.state.currentForm && $store.state.currentForm.destinations">
           
-          <div class="_fw-100 _fs-6 _pdt-24px " v-for="(value, key, index) in $store.state.forms[$route.params.id].destinations" :key="index">
+          <div class="_fw-100 _fs-6 _pdt-24px " v-for="(value, key, index) in $store.state.currentForm.destinations" :key="index">
 
-            <nuxt-link :to='`/a/${$route.params.id}/destinations/${value.placeid}`'>
+            <nuxt-link :to='`/a/${$route.params.uid}/${$route.params.formId}/destinations/${value.placeid}`'>
 
               <div class="_mgh-12px citiesimg _tal-ct _bgrp-nrp _bgs-cv _bgpst-ct" :style="`background-image: url(${value.photo || 'http://via.placeholder.com/350x150'})`">
               </div>
@@ -61,7 +61,7 @@
         </div>
        
 
-         <Footer title='Finish' :link='`/a/${$route.params.id}/thankyou`' back='Back'></Footer>
+         <Footer title='Finish' :link='`/a/${$route.params.uid}/${$route.params.formId}/thankyou`' back='Back'></Footer>
     </div>
   </MyDefaultLayout>
 </template>
@@ -104,10 +104,10 @@ export default {
   },
   computed: {
     title () {     
-      if (!this.$store.state.forms[this.$route.params.id]) {
+      if (!this.$store.state.currentForm) {
         return 'Thinking...'
       } else {
-        return this.$store.state.forms[this.$route.params.id].title
+        return this.$store.state.currentForm.title
       }
     }
     
