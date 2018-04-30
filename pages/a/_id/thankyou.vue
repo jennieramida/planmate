@@ -3,17 +3,17 @@
     <Header></Header>
     <div class="mapBg">
       <div class="_pdt-128px _mgt-24px">
-        <img class="icon" src="~/assets/thankyou.png">
-        <div class="title _fw-600 _fs-4 _pdt-48px">
+        <img class="iconthankyou" src="~/assets/thankyou.png">
+        <div class="title _fw-600 _fs-3 _pdt-48px _pdbt-2px">
           Having a trip?
         </div>
-        <div class="subtitle _fw-100 _fs-6 _pdt-12px  _pdh-48px">
+        <div class="subtitle _fw-100 _fs-6 _pdt-12px _pdbt-4px _pdh-48px">
           Create form with us to gather advice
           <br/> from your friends like this.
         </div>
       </div>
       
-      <div class="_pdh-48px _pdt-24px">
+      <div class="_pd-48px ">
         <nuxt-link to="/signup">
           <Button title="Create Form" />
         </nuxt-link>
@@ -51,6 +51,10 @@ export default {
 
 .title{
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.iconthankyou {
+  width: 50%;
 }
 </style>
 

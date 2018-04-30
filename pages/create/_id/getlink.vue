@@ -110,7 +110,7 @@ export default {
 }
 
 .textred {
-    color: red;
+    color: #D0021B;
 }
 
 .bluetext {

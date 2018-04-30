@@ -27,39 +27,22 @@
                 <div class="_fw-800 _fs-3">
                     Your Forms
                 </div>
-                <div class="_fw-100 _fs-6 _pdt-4px">
+                <div class="_fw-100 _fs-6 _pdt-4px _pdbt-12px">
                     Take a look at your forms, edit or generate plan from them.
                 </div>
             </div>
         </div>
-            <!-- All Form -->
-            <div class="lo-6 _pdt-12px _pdbt-64px">
-              <!-- <div class="_tal-r">
-                <div>
-                  <nuxt-link to="/form/id">
-                    <img class="_pd-8px" src="~/assets/venice.png">
-                  </nuxt-link>
-                </div>
-                <div>
-                <img class="_pd-8px" src="~/assets/paris.png">
-                </div>
-              </div>
-              
-             <div class="_tal-l">
-                <div>
-                  <img class="_pd-8px" src="~/assets/paris.png">
-                </div>
-                <div>
-                <img class="_pd-8px" src="~/assets/venice.png">
-                </div>
-              </div>
-            </div>         -->
-            <nuxt-link :to="`/form/${key}`" v-for="(value, key, index) in $store.state.forms" :key="index">
-              <div class="_h-128px _bgrp-nrp _bgs-cv _bgpst-ct" :style="`background-image: url(${value.destinations && Object.values(value.destinations)[0].photo || 'http://via.placeholder.com/350x150'})`">
-              </div>
-              <h4>{{ value.title }}</h4>
-            </nuxt-link>
+
+        <!-- All Form -->
+
+        <div class="lo-6 _pdt-12px _pdbt-64px _mgh-24px">
+        <nuxt-link :to="`/form/${key}`" v-for="(value, key, index) in $store.state.forms" :key="index">
+          <div class="citiesimg _mgh-12px citiesimg _tal-ct _bgrp-nrp _bgs-cv _bgpst-ct" :style="`background-image: url(${value.destinations && Object.values(value.destinations)[0].photo || 'http://via.placeholder.com/350x150'})`">
           </div>
+          <div class="blue _fs-5 _fw-600 _pdv-12px">{{ value.title }}</div>
+        </nuxt-link>
+        </div>
+            
     </div>
   </MyDefaultLayout>
 </template>
@@ -82,6 +65,16 @@ export default {
 
 .img {
   width: 120%;
+}
+
+.citiesimg {
+  height: 120px;
+  border-radius: 6px;
+}
+
+.blue {
+  color :  #69AFC0 !important;
+  
 }
 
 </style>

@@ -2,8 +2,8 @@
   <MyDefaultLayout>
     <Header></Header>
     <div class="cityhead helve _pdv-24px _mgt-48px _mgbt-0px">
-       <div class="_pdt-16px">{{ city.city }}
-         
+       <div class="_pdt-16px">
+         {{ cityname }}
        </div>
     </div>
 
@@ -18,7 +18,7 @@
           :center="center"
           :zoom="12"
           map-type-id="terrain"
-          style="width: 100%; height: 62vh"
+          style="width: 100%; height: 61vh"
           >
           <gmap-marker
               :key="index"
@@ -34,25 +34,29 @@
         <!-- Advice -->
         <div class="">
           <div v-show="isShowing === 'advice'">
-            <div class="advicebox">
-
-            <div class="_pdh-48px _tal-l _pdv-24px _pdbt-128px">
-              <div class="" v-for="(advice, i) in city.advices" :key="i">
-                  <div class="_pdt-8px">{{ advice }}</div>
-            
-                  <div class="_tal-r _pdv-24px" @click="toggleComment">
-                  0 comment
-                  </div>
-
-                  <div v-if="isCommentActive">
-                    <div class="bio-textarea _pdbt-24px">
-                      <textarea rows="5" placeholder="Give your advice">
-                      </textarea>
+            <div>
+              <div class="advicebox _pdh-48px _tal-l _pdv-24px _pdbt-128px">
+                <div class="" v-for="(advice, i) in advice" :key="i">
+                    <div class="_pdt-8px">{{ advice }}</div>
+              
+                    <div class="_tal-r _pdv-24px" @click="toggleComment">
+                    0 comment
                     </div>
-                  </div>
-                  <div class="line"></div>
-              </div>
-            </div> 
+
+                    <div v-if="isCommentActive">
+                      <div class="bio-textarea _pdbt-8px">
+                        <textarea rows="3" placeholder="Give your advice">
+                        </textarea>
+                      </div>
+                      <div class="_tal-ct _pdv-12px _f-r">
+                        <div class="btn _pdh-12px _cs-pt">
+                          Send
+                        </div>
+                      </div>
+                    </div>
+                    <!-- <div class="line"></div> -->
+                </div>
+              </div> 
 
             </div>
           </div>
@@ -81,9 +85,12 @@ export default {
   data () {
     return {
       city: {},
+      advice: [],
       place: null,
       isShowing: 'place',
       isCommentActive: false,
+      cityname: 'loading...',
+      // เราเคย define ไว้
       center: {
         lat: 0,
         lng: 0
@@ -95,15 +102,25 @@ export default {
       }],
     }
   },
-  created () {
-    let cityParam = this.$route.params.city
-    console.log(cityParam)
-    let cityData = this.$store.state.formData.destinations.filter(x => x.placeid === cityParam)
-    console.log(cityData)
-    this.city = cityData[0]
-    this.center = {
-      lat: cityData[0].lat,
-      lng: cityData[0].lng
+  //   this.city = cityData[0]
+  //   this.center = {
+  //     lat: cityData[0].lat,
+  //     lng: cityData[0].lng
+  //   }
+  // },
+  // No more computed yay
+  watch: {
+    '$store.state.forms' () { // ดักว่าเมื่อไหร่ forms เปลี่ยน === หมายถึง firebase load เสร็จ ... จริงๆใช้ watch แทนได้ทุกหน้าเลย 555 ลืมไป โอเคค่ะ
+      const id = this.$route.params.id
+      const city = this.$route.params.city
+      const form = this.$store.state.forms[id] // <---
+      // ไม่ต้องดักอีกต่อไป ใช้ watch แล้ว efficient กว่ามาก
+      this.center = { // <--
+        lat: form.destinations[city].lat,
+        lng: form.destinations[city].lng
+      }
+      this.cityname = form.destinations[city].city
+      this.advice = form.destinations[city].advices.q
     }
   },
   methods: {
@@ -113,10 +130,10 @@ export default {
     usePlace () {
       if (this.place) {
         this.markers.push({
-          position: {
-            lat: this.$store.state.formData.destinations.lat,
-            lng: this.$store.state.formData.destinations.lng,
-          }
+          // position: {
+          //   lat: this.$store.state.formData.destinations.lat,
+          //   lng: this.$store.state.formData.destinations.lng,
+          // }
         })
         this.center.lat = this.place.geometry.location.lat()
         this.center.lng = this.place.geometry.location.lng()
@@ -129,6 +146,9 @@ export default {
   }
 }
 </script>
+
+
+
 
 <style scoped>
 .boxbg {
@@ -170,12 +190,23 @@ export default {
 
 .advicebox {
   background-color: white;
+  min-height: 61vh !important;
 }
 
 .line {
   padding-top: 1px;
   background-color: #69AFC0;
   margin-bottom: 24px;
+}
+
+.btn {
+  background-color:#477C89;
+  color: white;
+  font-weight: 500;
+  border-radius: 6px;
+  padding: 8px;
+  width: 100%;
+  box-shadow: 1px 2px 4px 0 rgba(67, 124, 128, 0.42);
 }
 </style>
 

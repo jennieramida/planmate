@@ -1,7 +1,7 @@
 <template>
   <div class="top headWidth zhack">
        <!-- Header -->
-    <div class="header _pd-12px lo-4 _zid-1">
+    <div class="header _pd-12px lo-4 _zid-1 ">
       <div class="_pdl-8px _dp-f _alit-ct" @click="toggleMenu">
         <div class="_cs-pt">
           <img  src="~/assets/hamburgerbtn.png"> 
@@ -70,8 +70,8 @@
     </div>
 
     <!-- BreadCrumb -->
-    <div class=" _pdt-4px _mgt-4px">
-      <div v-if="hasBC" class=" _pdt-12px">
+    <div class="">
+      <div v-if="hasBC" class="BC _pdt-4px _pdt-12px _zid-0">
         <div class="_mgh-8px _pdh-12px">
             <el-breadcrumb separator="/">
              
@@ -182,10 +182,11 @@
     background-color: #F8F7F7;
     width: 180px;
     box-shadow: 2px 2px 10px 0 rgba(67, 124, 128, 0.42);
+    font-weight: 600;
     }
 
     .el-menu-item.is-active {
-    color: #427D81;
+    color: #303133;
     font-weight: 600;
     }
 
@@ -206,12 +207,32 @@
     .el-breadcrumb {
     font-size: 13px;
     line-height: 1;
-    font-weight: 300 !important;
+    /* font-weight: 300 !important; */
 }
 
     .el-breadcrumb__inner a:hover, .el-breadcrumb__inner.is-link:hover {
     color: #427D81;
     cursor: pointer;
 }
+
+ 
+    .el-breadcrumb__item:last-child .el-breadcrumb__inner, .el-breadcrumb__item:last-child .el-breadcrumb__inner a, {
+        font-weight: 800 !important;
+        color: #303134;
+        cursor: pointer;
+    }
+
+    .el-breadcrumb__item:last-child .el-breadcrumb__inner a:hover, .el-breadcrumb__item:last-child .el-breadcrumb__inner:hover {
+    color: #427D81;
+    font-weight: 600 !important;
+    cursor: pointer;
+}
+
+  .el-breadcrumb__item:last-child .el-breadcrumb__inner, .el-breadcrumb__item:last-child .el-breadcrumb__inner a,  .el-breadcrumb__item:last-child .el-breadcrumb__inner:hover {
+    font-weight: 800;
+    color: #303133;
+    cursor: pointer;
+}
+
 
 </style>

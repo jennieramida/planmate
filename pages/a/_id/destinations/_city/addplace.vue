@@ -3,14 +3,14 @@
     <div>
       <div class="lo-4 head">
         <div class="_pdv-12px helve _fs-6 _fw-100 _tal-l _pdl-24px">
-          <a href="javascript: history.back()">
+          <!-- <a href="javascript: history.back()">
           Cancel
-          </a>
+          </a> -->
         </div>
         <div class="_pdv-12px helve _cl-white _tal-ct _fs-5 _fw-600" >
           Add places
         </div>
-        <div class="_pdv-12px helve  _fs-6 _fw-100 _tal-r _pdr-24px">
+        <div class="_pdv-12px helve  _fs-6 _fw-500 _tal-r _pdr-24px">
           <a href="javascript: history.back()">
             Done
           </a>
@@ -24,21 +24,23 @@
         </div>
 
         <div class="_pdh-24px _mgt-12px _tal-l" v-if="city">
-          <div class="_fw-100 _fs-6 _pdt-8px _dp-il" v-for="(interest, i) in city.interests" :key="i">   
+          <div class="_fw-100 _fs-6 _pdt-8px _dp-il" v-for="(interest, i) in interest" :key="i">   
             <div class="_mgr-4px _pdv-4px _pdh-8px _dp-il tag">
               {{ interest }}
             </div>
-          </div>
+          </div>  
         </div>
 
 
         <!-- Map-->
         <div class="_pdt-12px">
             <div class="whitebg _pdv-12px _tal-ct">
-              <gmap-autocomplete class="_mgh-4px" @place_changed="setPlace">
+              <gmap-autocomplete :options="{
+                bounds: {north: 1.4, south: 1.2, east: 104, west: 102},
+                strictBounds: true
+              }" class="_mgh-4px" @place_changed="setPlace">
               </gmap-autocomplete>
-              <div class="_mgh-4px _tal-ct _dp-il btn" @click="usePlace">Search</div>
-              <div class="_mgh-4px _tal-ct _dp-il btn" @click="addPlace">Add Place</div>
+              <div class="_mgh-4px _tal-ct _dp-il btn _cs-pt" @click="usePlace">Add Place</div>
             </div>
 
             <div class="">  
@@ -46,16 +48,31 @@
               :center="center"
               :zoom="12"
               map-type-id="terrain"
-              style="width: 100%; height: 68vh"
+              style="width: 100%; height: 71vh"
+              @click="toggleInfo"
               >
-              <gmap-marker
-                :key="index"
-                v-for="(m, index) in markers"
-                :position="m.position"
-                :clickable="true"
-                :draggable="true"
-                @click="center=m.position"
-              ></gmap-marker>
+            
+              <GmapMarker v-for="(marker, index) in markers"
+              :key="index"
+              :position="marker.position"
+              label="★"
+              @click="toggleInfo"
+              />
+
+              <!-- <GmapInfoWindow
+                v-if="infoActive"
+                z-index =1>
+                (Your content here)
+              </GmapInfoWindow> -->
+
+              <GmapMarker
+                v-if="this.place"
+                label="☆"
+                :position="{
+                  lat: this.place.geometry.location.lat(),
+                  lng: this.place.geometry.location.lng(),
+                }"
+              />
               </gmap-map>
             </div> 
  
@@ -82,6 +99,8 @@ export default {
     return {
       place: null,
       isShowing: 'place',
+      infoActive: false,
+      interest: [],
       center: {lat: 10.0, lng: 10.0},
       markers: [{
         position: {lat: 10.0, lng: 10.0}
@@ -92,21 +111,29 @@ export default {
       dataPlace: {}
     }
   },
-  created () {
-    const cityParam = this.$route.params.city
-    console.log(cityParam)
-    const cityData = this.$store.state.formData.destinations.filter(x => x.placeid === cityParam)
-    this.city = cityData[0]
-    this.center = {
-      lat: cityData[0].lat,
-      lng: cityData[0].lng
+  watch: {
+    '$store.state.forms' () { // ดักว่าเมื่อไหร่ forms เปลี่ยน === หมายถึง firebase load เสร็จ ... จริงๆใช้ watch แทนได้ทุกหน้าเลย 555 ลืมไป โอเคค่ะ
+      const id = this.$route.params.id
+      const city = this.$route.params.city
+      const form = this.$store.state.forms[id] // <---
+      // ไม่ต้องดักอีกต่อไป ใช้ watch แล้ว efficient กว่ามาก
+      this.center = { // <--
+        lat: form.destinations[city].lat,
+        lng: form.destinations[city].lng
+      }
+      this.cityname = form.destinations[city].city
+      this.interest = form.destinations[city].interests.q
     }
   },
   methods: {
     setPlace (place) {
       this.place = place
+      this.center.lat = this.place.geometry.location.lat()
+      this.center.lng = this.place.geometry.location.lng()
     },
-    usePlace () {
+    usePlace (place) {
+      console.log(place)
+      
       if (this.place) {
         this.markers.push({
           position: {
@@ -119,9 +146,32 @@ export default {
         this.dataPlace = this.place
         this.place = null;
       }
-    },
-    addPlace () {
       console.log(this.dataPlace)
+
+      let Place = this.dataPlace
+      let placeName = Place.name
+      let placeLat = Place.geometry.location.lat()
+      let placeLng = Place.geometry.location.lng()
+      let placeAddress = Place.formatted_address
+      let placeWebsite = Place.website
+      let placeRating = Place.rating
+      const photoUrl = Place.photos[0].getUrl({
+        maxWidth: 640
+      });
+      
+       this.$store.commit('addPlace', {
+        formId: this.$route.params.id,
+        destinationKey: this.$route.params.placeid,
+        place: Place
+      })
+
+      Firebase.updateForm(this.$store.state.UID, this.$route.params.id, {
+       destinations: this.$store.state.forms[this.$route.params.id].destinations
+      })
+    },
+
+    toggleInfo() {
+      this.infoActive = !this.infoActive
     }
   }
 }
@@ -194,10 +244,13 @@ input {
     font-family: inherit;
     -webkit-appearance: none;
     border-radius: 20px;
-    padding: 4px;
+    padding: 6px;
+    padding-left: 10px;
+    margin-right: 6px !important;
     display: inline;
     cursor: text;
 }
+
 
   a {
     background-color: transparent;
