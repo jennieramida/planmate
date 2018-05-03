@@ -6,11 +6,15 @@
     }
   },
   "hosting": {
-    "public": "dist",
+    "public": "nuxt/dist",
     "ignore": [
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
-    ]
+    ],
+    "rewrites": [{
+      "source": "**",
+      "function": "ssrapp"
+    }]
   }
 }

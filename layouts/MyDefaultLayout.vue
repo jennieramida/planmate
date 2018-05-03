@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="wrapper">
     <div class="container">
       <!-- Back button container -->
       <div class="backButton" v-if="hasBack">
@@ -11,7 +11,7 @@
 </template>
 
   
-<script scoped>
+<script>
 import Button from '~/components/MyButton.vue'
 import firebase from 'firebase'
 import * as Firebase from '~/services/firebase'
@@ -91,10 +91,13 @@ export default {
 </script>
 
 <style scoped>
+  .wrapper {
+    background: #F8F7F7;
+  }
   .container {
     text-align: center;
     background-color: #F8F7F7;
-    /* min-height: 100vh; */
+    min-height: 100vh;
     /* overflow: hidden; */
     font-family: 'Helvetica';
     margin-bottom: 0px;

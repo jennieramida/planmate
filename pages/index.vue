@@ -67,7 +67,7 @@
       </div>
 
     </div>
-    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <!-- <script src="https://unpkg.com/element-ui/lib/index.js"></script> -->
   </MyDefaultLayout>
 </template>
 

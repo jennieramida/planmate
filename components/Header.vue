@@ -126,11 +126,11 @@
   .header {
     background-color: #F8F7F7;
     box-shadow: 0 1px 6px 0 #D7D7D7;
-    min-width: 60vh;
+    width: 100%;
   }
 
   .headWidth {
-    width: 450px;
+    width: 100%;
   }
 
   @media only screen and (max-width: 450px) {

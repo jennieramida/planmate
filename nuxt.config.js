@@ -19,9 +19,9 @@ module.exports = {
       // { rel: 'stylesheet', href: 'path/to/font-awesome/css/font-awesome.min.css'}
       // 5555 แม่งมี bug แป้บนะ 
     ],
-    script: [
-      { src: 'https://unpkg.com/element-ui/lib/index.js' }
-    ],
+    // script: [
+    //   { src: 'https://unpkg.com/element-ui/lib/index.js' }
+    // ],
   },
   /*
   ** Customize the progress bar color
@@ -36,22 +36,36 @@ module.exports = {
   /*
   ** Build configuration
   */
+  transition: {
+    name: 'page',
+    mode: 'out-in'
+  },
   plugins: [
     '~/plugins/vue-google-maps.js',
     '~/plugins/vue-js-modal',
     '~/plugins/vuefire.js',
-    '~/plugins/vue-clipboard',
-    '~/plugins/element-ui'
+    { src: '~/plugins/vue-clipboard', ssr: false },
+    { src: '~/plugins/element-ui', ssr: false}
     
-
   ],
-  generate: {
-    dir: 'dist'
-  },
   build: {
     /*
     ** Run ESLint on save
     */
+    babel: {
+      presets: [[
+        "env", {
+          "targets": {
+            "chrome": 52,
+            "browsers": ["safari 7", "ie 11"]
+          }
+        }
+      ], 'stage-0', 'stage-1', 'stage-2', 'stage-3'],
+      plugins: [
+        "transform-runtime",
+        "transform-async-to-generator"
+      ]
+    },
     extend (config, ctx) {
       if (ctx.isDev && ctx.isClient) {
         config.module.rules.push({

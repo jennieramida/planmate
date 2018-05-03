@@ -64,7 +64,7 @@ export const mutations = {
 		state.currentForm = form
 	},
 	setExistingForms (state, forms) {
-		state.forms = forms.forms
+		state.forms = forms
 	},
 	setDestinationInterests (state, { formId, destinationKey, interest }) {
 		const dest = state.forms[formId].destinations[destinationKey]
