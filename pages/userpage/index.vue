@@ -6,7 +6,7 @@
             <img class="_pdt-128px" src="~/assets/iconmap.png">
             <div class="_pdt-12px _tal-ct _cl-black">
             <div class="_fw-800 _fs-2">
-                Hello, Name!
+                Hello, traveler!
             </div>
             <div class="subtitle _fw-100 _fs-6 _pdt-4px _pdh-48px">
                 Great things never came from comfort zones.
@@ -37,7 +37,7 @@
 
         <div class="lo-6 _pdt-12px _pdbt-64px _mgh-24px">
         <nuxt-link :to="`/form/${key}`" v-for="(value, key, index) in $store.state.forms" :key="index">
-          <div class="citiesimg _mgh-12px citiesimg _tal-ct _bgrp-nrp _bgs-cv _bgpst-ct" :style="`background-image: url(${value.destinations && Object.values(value.destinations)[0].photo || 'http://via.placeholder.com/350x150'})`">
+          <div class="citiesimg _mgh-12px _tal-ct _bgrp-nrp _bgs-cv _bgpst-ct" :style="`background-image: url(${value.destinations && Object.values(value.destinations)[0].photo || ''})`">
           </div>
           <div class="blue _fs-5 _fw-600 _pdv-12px">{{ value.title }}</div>
         </nuxt-link>

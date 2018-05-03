@@ -7,7 +7,7 @@
           <BackButton :back="back"/>
         </a>
         <!-- Special case -->
-        <nuxt-link :to='`/a/${$route.params.id}/destinations`'
+        <nuxt-link :to='`/a/${$route.params.uid}/${$route.params.formId}/destinations`'
         v-if="backMode === 'backToFriendPage'">
           <BackButton :back="back"/>
         </nuxt-link>

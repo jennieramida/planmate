@@ -20,7 +20,7 @@
 
     <div>
         <div class="helve _fs-5 _fw-600 _pdt-24px _cl-dark _pdl-24px _tal-l">
-            What's Thanya like?
+            What's your friend like?
         </div>
 
         <div class="_pdh-24px _mgt-12px _tal-l" v-if="city">
@@ -35,10 +35,10 @@
         <!-- Map-->
         <div class="_pdt-12px">
             <div class="whitebg _pdv-12px _tal-ct">
-              <gmap-autocomplete :options="{
-                bounds: {north: 1.4, south: 1.2, east: 104, west: 102},
-                strictBounds: true
-              }" class="_mgh-4px" @place_changed="setPlace">
+              <gmap-autocomplete 
+              v-bind:options="bound"
+              class="_mgh-4px" 
+              @place_changed="setPlace">
               </gmap-autocomplete>
               <div class="_mgh-4px _tal-ct _dp-il btn _cs-pt" @click="usePlace">Add Place</div>
             </div>
@@ -49,14 +49,26 @@
               :zoom="12"
               map-type-id="terrain"
               style="width: 100%; height: 71vh"
-              @click="toggleInfo"
               >
-            
+              <gmap-info-window 
+              class="_fs-3 _pd-12px"
+              :options="infoOptions" 
+              :position="infoWindowPos" 
+              :opened="infoWinOpen" 
+              @closeclick="infoWinOpen=false">
+              <div class="_mg-4px">
+                <div class="_fs-7 _fw-700 _pdv-4px greentext">{{infoContent}}</div>
+                <div class="bluetext _fw-400">{{infoAddress}}</div>
+                <div class="bluetext _fw-400">Rating ★ {{infoWebsite}}</div>
+              </div>
+              </gmap-info-window>
+
               <GmapMarker v-for="(marker, index) in markers"
               :key="index"
               :position="marker.position"
               label="★"
-              @click="toggleInfo"
+              :clickable="true" 
+              @click="toggleInfoWindow(marker, index)"
               />
 
               <!-- <GmapInfoWindow
@@ -88,6 +100,7 @@ import MyDefaultLayout from '~/layouts/MyDefaultLayout.vue'
 import Button from '~/components/MyButton.vue'
 import * as VueGoogleMaps from '~/node_modules/vue2-google-maps/src/main'
 import IntTag from '~/components/IntTag.vue'
+import * as Firebase from '~/services/firebase'
 
 export default {
   components: {
@@ -101,21 +114,30 @@ export default {
       isShowing: 'place',
       infoActive: false,
       interest: [],
-      center: {lat: 10.0, lng: 10.0},
+      center: {lat: '', lng: ''},
       markers: [{
-        position: {lat: 10.0, lng: 10.0}
-      }, {
-        position: {lat: 11.0, lng: 11.0}
+        position: {lat: '', lng: ''},
+        infoText: ''
       }],
       city: {},
-      dataPlace: {}
+      dataPlace: {},
+      infoContent: '',
+      infoWindowPos: null,
+      infoWinOpen: false,
+      currentMidx: null,
+      infoOptions: {
+            pixelOffset: {
+              width: 0,
+              height: -35
+            }
+      },
     }
   },
   watch: {
-    '$store.state.forms' () { // ดักว่าเมื่อไหร่ forms เปลี่ยน === หมายถึง firebase load เสร็จ ... จริงๆใช้ watch แทนได้ทุกหน้าเลย 555 ลืมไป โอเคค่ะ
+    '$store.state.currentForm' () { // ดักว่าเมื่อไหร่ forms เปลี่ยน === หมายถึง firebase load เสร็จ ... จริงๆใช้ watch แทนได้ทุกหน้าเลย 555 ลืมไป โอเคค่ะ
       const id = this.$route.params.id
       const city = this.$route.params.city
-      const form = this.$store.state.forms[id] // <---
+      const form = this.$store.state.currentForm // <---
       // ไม่ต้องดักอีกต่อไป ใช้ watch แล้ว efficient กว่ามาก
       this.center = { // <--
         lat: form.destinations[city].lat,
@@ -125,55 +147,108 @@ export default {
       this.interest = form.destinations[city].interests.q
     }
   },
+  computed: {
+    bound() {
+      const id = this.$route.params.id
+      const city = this.$route.params.city
+      const form = this.$store.state.currentForm
+      
+      if (!form.destinations[city]) {
+        return {  
+          bounds: {north: 1.4, south: 1.2, east: 104, west: 102},
+          strictBounds: true
+        }
+      }
+      else  {
+        return {  
+          bounds: {
+            north: (form.destinations[city].lat)+0.01, 
+            south: (form.destinations[city].lat)-0.01, 
+            east: (form.destinations[city].lng)+0.1, 
+            west: (form.destinations[city].lng)-0.1
+            },
+          strictBounds: true
+        }
+      }
+    }
+  },
+
   methods: {
     setPlace (place) {
       this.place = place
       this.center.lat = this.place.geometry.location.lat()
       this.center.lng = this.place.geometry.location.lng()
+
     },
-    usePlace (place) {
-      console.log(place)
-      
+
+    usePlace () {
+
+     console.log(this.place)
       if (this.place) {
         this.markers.push({
           position: {
             lat: this.place.geometry.location.lat(),
             lng: this.place.geometry.location.lng(),
-          }
+          },
+          infoText: this.place.name,
+          infoTextAd: this.place.formatted_address,
+          infoWeb: this.place.rating
         })
         this.center.lat = this.place.geometry.location.lat()
         this.center.lng = this.place.geometry.location.lng()
-        this.dataPlace = this.place
-        this.place = null;
+        // this.dataPlace = this.place
+        // this.place = null;
       }
-      console.log(this.dataPlace)
+      // console.log(this.dataPlace)
 
-      let Place = this.dataPlace
-      let placeName = Place.name
-      let placeLat = Place.geometry.location.lat()
-      let placeLng = Place.geometry.location.lng()
-      let placeAddress = Place.formatted_address
-      let placeWebsite = Place.website
-      let placeRating = Place.rating
-      const photoUrl = Place.photos[0].getUrl({
-        maxWidth: 640
-      });
-      
-       this.$store.commit('addPlace', {
-        formId: this.$route.params.id,
-        destinationKey: this.$route.params.placeid,
-        place: Place
+      const formId = this.$route.params.formId
+      const city = this.$route.params.city
+      let form = JSON.parse(JSON.stringify(this.$store.state.currentForm))
+      // let form = Object.assign({}, this.$store.state.currentForm) // <---
+      // ไม่ต้องดักอีกต่อไป ใช้ watch แล้ว efficient กว่ามาก
+
+      // extract only what we need from this.place
+           let placeData = {
+        name: this.place.name,
+        lat: this.place.geometry.location.lat(),
+        lng: this.place.geometry.location.lng(),
+        address: this.place.formatted_address,
+        website: this.place.website,
+        rating: this.place.rating
+
+      }
+
+      if (!form.destinations[city].interests.a) {
+        // no existing array
+        form.destinations[city].interests.a = [placeData]
+      } else {
+        form.destinations[city].interests.a.push(placeData)
+      }
+      console.log(form.destinations) // √
+      Firebase.updateForm(this.$store.state.UID, formId, {
+        destinations: form.destinations
       })
 
-      Firebase.updateForm(this.$store.state.UID, this.$route.params.id, {
-       destinations: this.$store.state.forms[this.$route.params.id].destinations
-      })
     },
-
-    toggleInfo() {
-      this.infoActive = !this.infoActive
+      
+    toggleInfoWindow: function(marker, idx) {
+      this.infoWindowPos = marker.position;
+      this.infoContent = marker.infoText;
+      this.infoAddress = marker.infoTextAd;
+      this.infoWebsite = marker.infoWeb;
+      //check if its the same marker that was selected if yes toggle
+      if (this.currentMidx == idx) {
+        this.infoWinOpen = !this.infoWinOpen;
+      }
+      //if different marker set infowindow to open and reset current marker index
+      else {
+        this.infoWinOpen = true;
+        this.currentMidx = idx;
+      }
     }
+          
   }
+  
 }
 </script>
 
@@ -257,5 +332,12 @@ input {
     -webkit-text-decoration-skip: objects;
     text-decoration: none;
     color: white !important;
+}
+
+.gm-style .gm-style-iw {
+    font-weight: 500;
+    font-size: 14px;
+    padding: 20px;
+    overflow: hidden;
 }
 </style>

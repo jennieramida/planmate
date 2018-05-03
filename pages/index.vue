@@ -48,7 +48,7 @@
           <div class="_fs-4 _fw-600 _pd-12px">
             Let's go exploring!
           </div>
-          <div class="subtitle _lh-125pct _pdbt-24px">
+          <div class="subtitle _lh-125pct _pdbt-48px">
             Choose what suit you and simply
             <br/>generate form into travel plan,
             <br/>Then just go travel!
@@ -62,10 +62,8 @@
         </nuxt-link>
       </div>
     
-      <div class="_tal-ct _fw-600 _pdbt-48px">
-        <nuxt-link to="/signin">
-          <span class="link">Sign In to Continue Existing Form</span>
-        </nuxt-link>
+      <div class="_tal-ct _fw-600 _pdbt-64px">
+        
       </div>
 
     </div>

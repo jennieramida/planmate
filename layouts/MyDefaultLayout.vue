@@ -56,12 +56,13 @@ export default {
     },
     fetchDatabase (uid) {
       let that = this
-      if (this.$route.path.indexOf('/create/') > -1) {
+      if (this.$route.path.indexOf('/create/') > -1 || this.$route.path.indexOf('/userpage') > -1) {
         firebase.database().ref('/user/' + uid)
           .on('value', (snapshot) => {
             that.$store.commit('setExistingForms', snapshot.val())
           })
       }
+      
       if (this.$route.path.indexOf('/a/') > -1) {
         // when answering
         let uid = this.$route.params.uid
@@ -71,6 +72,18 @@ export default {
             that.$store.commit('setCurrentForm', snapshot.val())
           })
       }
+
+      if (this.$route.path.indexOf('/form/') > -1) {
+        // when answering
+        let uid = this.$store.state.UID
+        let formId = this.$route.params.formId
+        firebase.database().ref('/user/' + uid + '/forms/' + formId)
+          .on('value', (snapshot) => {
+            that.$store.commit('setCurrentForm', snapshot.val())
+          })
+      }
+
+      
     }
   }
 }

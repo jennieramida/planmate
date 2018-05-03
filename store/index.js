@@ -113,5 +113,34 @@ export const mutations = {
 		// 	// dest.advices = [{advice}, {}]
 			
 		// }
-	}
+	},
+	setAdviceAnswer (state, { formId, destinationKey, adviceAnswer }) {
+		const dest = state.forms[formId].destinations[destinationKey]
+		if (dest.advices) { // ถ้ามีอยู่แล้ว 
+			// dest.advices.q.push(advice)
+			dest.advices.push({
+				q: [],
+				a: [adviceAnswer]
+			})
+		} else { // ถ้ายังไม่มี
+			dest.advices = [
+				{
+					q: [],
+					a: adviceAnswer
+				}
+			]
+			// dest.advices = [{advice}, {}]
+			/*
+				advices = [
+					{
+						q: 'xxx',
+						a: [{
+							user: 'name',
+							content: 'yyy'
+						}]
+					}
+				]
+			*/
+		}
+	},
 }

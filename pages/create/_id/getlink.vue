@@ -18,7 +18,7 @@
           
         <div class="_dp-f _fdrt-r _alit-ct"> 
           <div class="bio-input -positive">
-            <input type="text" :value="`https://planmate.city/a/${$route.params.id}`">
+            <input type="text" :value="`https://planmate.me/a/${$route.params.id}`">
           </div>
           <div class="bio-button _pd-4px _mg-4px _fs-6"
           v-clipboard:copy="thingToCopy"
