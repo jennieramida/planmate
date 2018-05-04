@@ -1,10 +1,10 @@
 # PLANMATE
-> © 2018 Planmate.
-> As Senior Project by Ramida J. ALL RIGHTS RESERVED.
-> Department of Industrial Design, Faculty of Architecture
-> Chulalongkorn University, Bangkok, Thailand
+> © 2018 Planmate. As Senior Project by Ramida J. ALL RIGHTS RESERVED | Department of Industrial Design, Faculty of Architecture, Chulalongkorn University
 
-## Build Setup
+## Never Live Vicariously
+> Great things never come from comfort zone.
+
+### Build Setup
 
 ``` bash
 # install dependencies
