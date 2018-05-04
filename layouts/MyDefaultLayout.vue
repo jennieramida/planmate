@@ -107,9 +107,9 @@ export default {
   color: #477C89;
 }
 
-@media only screen and (min-width: 420px) {
+@media only screen and (max-width: 450px) {
 body {
-    width: 420px !important;
+    width: 100% !important;
 }
 }
 </style>

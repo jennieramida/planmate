@@ -56,7 +56,7 @@ export default {
       const placeid = x.address_components[0].short_name
       this.placeid = placeid
       // console.log(this.$route.params.id)
-      let destinations = this.$store.state.forms[this.$route.params.id].destinations || {}
+      let destinations = this.$store.state.forms.forms[this.$route.params.id].destinations || {}
       console.log(destinations)
       destinations[placeid] = {
         city: x.formatted_address,

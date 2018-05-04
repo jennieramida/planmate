@@ -10,8 +10,8 @@
         </div>
       </div>
 
-      <div class="lo-6 _pdt-12px _pdbt-256px _mgh-24px" v-if="$store.state.forms[$route.params.id] && $store.state.forms[$route.params.id].destinations">
-        <div class="_fw-100 _fs-6 _pdt-24px " v-for="(value, key, index) in $store.state.forms[$route.params.id].destinations" :key="index">
+      <div class="lo-6 _pdt-12px _pdbt-256px _mgh-24px" v-if="$store.state.forms.forms[$route.params.id] && $store.state.forms.forms[$route.params.id].destinations">
+        <div class="_fw-100 _fs-6 _pdt-24px " v-for="(value, key, index) in $store.state.forms.forms[$route.params.id].destinations" :key="index">
           <div class="_mgh-12px citiesimg _tal-ct _bgrp-nrp _bgs-cv _bgpst-ct" :style="`background-image: url(${value.photo || 'http://via.placeholder.com/350x150'})`">
           </div>
           <div class="_pdt-12px _fw-600">{{ value.city }}</div>
@@ -52,10 +52,10 @@ export default {
     
     computed: {
     title () {
-      if (!this.$store.state.forms[this.$route.params.id]) {
+      if (!this.$store.state.forms.forms[this.$route.params.id]) {
         return 'Thinking...'
       } else {
-        return this.$store.state.forms[this.$route.params.id].title
+        return this.$store.state.forms.forms[this.$route.params.id].title
       }
     }
   }

@@ -36,7 +36,7 @@
         <!-- All Form -->
 
         <div class="lo-6 _pdt-12px _pdbt-64px _mgh-24px">
-        <nuxt-link :to="`/form/${key}`" v-for="(value, key, index) in $store.state.forms" :key="index">
+        <nuxt-link :to="`/form/${key}`" v-for="(value, key, index) in $store.state.forms.forms" :key="index">
           <div class="citiesimg _mgh-12px _tal-ct _bgrp-nrp _bgs-cv _bgpst-ct" :style="`background-image: url(${value.destinations && Object.values(value.destinations)[0].photo || ''})`">
           </div>
           <div class="blue _fs-5 _fw-600 _pdv-12px">{{ value.title }}</div>

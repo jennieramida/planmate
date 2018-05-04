@@ -60,7 +60,7 @@ export default {
       })
       // console.log('update form')
       Firebase.updateForm(this.$store.state.UID, this.$route.params.id, {
-        destinations: this.$store.state.forms[this.$route.params.id].destinations
+        destinations: this.$store.state.forms.forms[this.$route.params.id].destinations
       })
     }
   },
@@ -70,10 +70,10 @@ export default {
   // },
   computed: {
     city () {
-      if (!this.$store.state.forms[this.$route.params.id]) {
+      if (!this.$store.state.forms.forms[this.$route.params.id]) {
         return 'traveling...'
       } else {
-        return this.$store.state.forms[this.$route.params.id].destinations[this.$route.params.placeid].city
+        return this.$store.state.forms.forms[this.$route.params.id].destinations[this.$route.params.placeid].city
       }
     }
   },

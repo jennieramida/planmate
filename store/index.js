@@ -67,7 +67,7 @@ export const mutations = {
 		state.forms = forms
 	},
 	setDestinationInterests (state, { formId, destinationKey, interest }) {
-		const dest = state.forms[formId].destinations[destinationKey]
+		const dest = state.forms.forms[formId].destinations[destinationKey]
 		if (dest.interests) {
 			dest.interests.q.push(interest)
 		} else {
@@ -75,7 +75,7 @@ export const mutations = {
 		}
 	},
 	setDestinationAdvices (state, { formId, destinationKey, advice }) {
-		const dest = state.forms[formId].destinations[destinationKey]
+		const dest = state.forms.forms[formId].destinations[destinationKey]
 		if (dest.advices) { // ถ้ามีอยู่แล้ว 
 			// dest.advices.q.push(advice)
 			dest.advices.push({
@@ -104,7 +104,7 @@ export const mutations = {
 		}
 	},
 	addPlace (state, { formId, destinationKey, place }) {
-		const dest = state.forms[formId].destinations[destinationKey]
+		const dest = state.forms.forms[formId].destinations[destinationKey]
 		console.log(dest)
 		// if (dest.interests) {
 		// 	dest.interests.a.push(place)
@@ -115,7 +115,7 @@ export const mutations = {
 		// }
 	},
 	setAdviceAnswer (state, { formId, destinationKey, adviceAnswer }) {
-		const dest = state.forms[formId].destinations[destinationKey]
+		const dest = state.forms.forms[formId].destinations[destinationKey]
 		if (dest.advices) { // ถ้ามีอยู่แล้ว 
 			// dest.advices.q.push(advice)
 			dest.advices.push({

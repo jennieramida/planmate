@@ -105,7 +105,9 @@ export default {
           lat: '',
           lng: '',
         },
-        infoText:''
+        infoText:'',
+        infoWebsite:'',
+        infoAddress:''
       }],
       infoContent: '',
       infoWindowPos: null,

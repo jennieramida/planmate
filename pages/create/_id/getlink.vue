@@ -82,7 +82,7 @@ export default {
     mounted () {
     // update tripData
     // Firebase.updateForm(this.$store.state.tripData.id, this.$store.state.tripData)
-    this.thingToCopy = `https://planmate.city/a/${this.$store.state.UID}/${this.$route.params.id}`
+    this.thingToCopy = `https://planmate.me/a/${this.$store.state.UID}/${this.$route.params.id}`
   },
   data() {
     return {

@@ -60,12 +60,9 @@
         username: ''
       }
     },
-    // created () {
-    //   this.$store.commit('setFormData', this.trip)
-    // },
+
     methods: {
       updateUserName() {
-        // let username = this.$refs.UserNameInput.value
         this.$store.commit('setUserData', {
           key: 'username',
           value: this.username

@@ -6,7 +6,7 @@
     </div>
     <div v-if="answers" class="_cs-pt _pdv-12px _tal-r" @click="isShowingAnswers = !isShowingAnswers">
       {{ answers.length || 0 }} comments
-    </div>
+    </div> 
     <div v-if="isShowingAnswers" class="_pdv-12px">
       <div class="_pdv-12px" v-for="(a, i) in answers" :key="i">
         {{ answers }}
@@ -33,11 +33,7 @@ export default {
   }),
       receiveAdviceAnswer (i, answer) {
       console.log(i) // Art galleries
-      // this.$store.commit('setAdviceAnswer', {
-      //   formId: this.$route.params.id,
-      //   destinationKey: this.$route.params.placeid,
-      //   adviceAnswer: x
-      // })
+
       const formId = this.$route.params.formId
       const city = this.$route.params.city
       let form = Object.assign({}, this.$store.state.currentForm) // <---
@@ -53,7 +49,6 @@ export default {
         destinations: form.destinations
       })
     }
-
 }
 </script>
 

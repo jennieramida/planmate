@@ -7,7 +7,6 @@
         <div class=" _fw-800 _fs-3">
         <nuxt-link :to='`/userpage`'>←</nuxt-link>
          {{ title }}
-
         </div>
       </div>
 
@@ -80,9 +79,25 @@
           <!-- Summary -->
           <div class="">
             <div v-show="isShowing === 'summary'">
-              <div class="advicebox">
-              {{ title }}
-                <div class="lo-10-2 _pdh-24px _mgv-24px"> 
+              <div class="_pdt-24px _fw-800 _fs-3">
+                  Summary
+                </div>
+                <div class="subtitle _fw-100 _fs-6 _pdt-4px _pdh-48px">
+                  All data from your friends for this trip
+                </div>
+
+              <div class="advicebox _tal-l _pdt-24px _pdh-24px">
+              <div class="_fs-5 _fw-800 _pd-24px">Trip Name : {{ title }}</div>
+              <div class="_pdt-12px _fw-600 _pdh-24px">Cities : </div>
+                <div class="_fw-100 _fs-6 _pdh-24px " v-for="(value, key, index) in $store.state.currentForm.destinations" :key="index">
+
+                    <div class="_pdt-12px _fw-300">
+                     ▸ {{ value.city }}
+                    </div>
+                </div>
+                <div class="lo-6 _tal-ct _mgh-48px _pdt-128px">
+                  <div class="btn _mgh-4px">Print Summary</div>
+                  <div class="btn _mgh-4px">Send as E-mail</div>
                 </div>
               </div>
             </div>
@@ -131,6 +146,7 @@ export default {
       infoWindowPos: null,
       infoWinOpen: false,
       currentMidx: null,
+      forEach:'',
       infoOptions: {
             pixelOffset: {
               width: 0,
@@ -186,7 +202,7 @@ export default {
       } else {
         return this.$store.state.currentForm.title
       }
-    }
+    },
   },
 
   methods: {
@@ -292,6 +308,17 @@ a:-webkit-any-link {
 
 element.style {
   border-radius: 20px !important;
+}
+
+
+.btn {
+  background-color:#477C89;
+  color: white;
+  font-weight: 500;
+  line-height: 36px;
+  border-radius: 10px;
+  padding: 2px;
+  box-shadow: 1px 2px 4px 0 rgba(67, 124, 128, 0.42);
 }
 </style>
 

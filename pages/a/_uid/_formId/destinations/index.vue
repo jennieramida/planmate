@@ -35,14 +35,7 @@
             </div>
           </div>
         </div> 
-            <!-- <div class="lo-6 _pdbt-128px _mgh-24px">
-              <div class="_fw-100 _fs-6 _pdt-24px" v-for="(x, i) in $store.state.forms[$route.params.id].destinations" :key="i">
-                <nuxt-link :to="$route.fullPath + '/' + x.placeid" >
-                  <img class="citiesimg" :src="x.photo">
-                  <div class="_pdt-8px">{{ x.city }}</div>
-                </nuxt-link>
-              </div>
-            </div> -->
+
 
         <div class="lo-6 _pdt-12px _pdbt-256px _mgh-24px" v-if="$store.state.currentForm && $store.state.currentForm.destinations">
           

@@ -1,6 +1,8 @@
-# togather
-
-> Nuxt.js project
+# PLANMATE
+> © 2018 Planmate.
+> As Senior Project by Ramida J. ALL RIGHTS RESERVED.
+> Department of Industrial Design, Faculty of Architecture
+> Chulalongkorn University, Bangkok, Thailand
 
 ## Build Setup
 
